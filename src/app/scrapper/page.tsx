@@ -9,7 +9,7 @@ export default function Form() {
   const [ticker, setUrl] = useState<string>('')
   const [load, setLoad] = useState(false)
   const [err, setErr] = useState<any>(null)
-  const [extractedText, setExtractedText] = useState<string>('')
+  const [extractedFinancials, setExtractedFinancials] = useState<string>('')
 
   const update = (e: any) => {
     setUrl(e.target.value)
@@ -38,8 +38,8 @@ export default function Form() {
 
       console.log('Request sent successfully!')
       const data = await response.json()
-      if (data.extractedText) {
-        setExtractedText(data.extractedText)
+      if (data.extractedFinancials) {
+        setExtractedFinancials(data.extractedFinancials)
       } else {
         if (data.urlerror) {
           setErr(data.urlerror)
@@ -80,10 +80,10 @@ export default function Form() {
             {load ? 'Scrapping...' : 'Scrap Data'}
           </Button>
         </div>
-        {extractedText && (
+        {extractedFinancials && (
           <div className="w-full mt-4 p-4 border border-gray-300 rounded">
             <h5 className="font-semibold">Extracted Text:</h5>
-            <p>{extractedText || err}</p>
+            <p>{extractedFinancials || err}</p>
           </div>
         )}
       </div>

@@ -1,34 +1,35 @@
-'use client'
-
 export function parseFinancials(rawText: string) {
-  const lines = rawText.split('\n')
-  const blocks = []
-  let currentBlock = {}
+  const lines = rawText
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line)
 
-  lines.forEach((line) => {
-    const [title, ...rest] = line.split(' ')
+  const titles = [
+    'Valuation',
+    'Balance Sheet as of Mar 31, 2024',
+    'Operating Metrics',
+    'Price History',
+    'Dividends',
+    'Margins',
+    'Income Statement',
+  ]
 
-    if (title.endsWith(':')) {
-      if (Object.keys(currentBlock).length > 0) {
-        blocks.push(currentBlock)
-      }
-      currentBlock = { title: title.slice(0, -1), [rest.join(' ')]: null }
-    } else {
-      const key = title
-      const value = rest.join(' ')
-      currentBlock[key as string] = value
+  let currentTitle = ''
+  const result = {}
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]
+
+    if (titles.includes(line)) {
+      currentTitle = line
+      result[currentTitle] = {}
+    } else if (currentTitle && i + 1 < lines.length) {
+      const key = line
+      const value = lines[i + 1]
+      result[currentTitle][key] = value
+      i++
     }
-  })
-
-  if (Object.keys(currentBlock).length > 0) {
-    blocks.push(currentBlock)
   }
 
-  const jsonData = blocks.reduce((acc, block) => {
-    const { title, ...data } = block
-    acc[title] = data
-    return acc
-  }, {})
-
-  return JSON.stringify(jsonData, null, 2)
+  return result
 }
