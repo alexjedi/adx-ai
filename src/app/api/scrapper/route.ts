@@ -2,29 +2,33 @@ import { NextResponse } from 'next/server'
 import puppeteer from 'puppeteer'
 
 export async function POST(request: Request) {
+  console.log('POST request received')
   let browser
   try {
     const { url } = await request.json()
+    console.log('URL received:', url)
 
     const urlRegex = /^(http|https):\/\/[^ "]+$/
 
-    if (!urlRegex.test(url)) {
+    https: if (!urlRegex.test(url)) {
       return NextResponse.json({ urlerror: 'invalid url' })
     }
 
-    if (process.env.API) {
-      // If the API URL is present, connect to the existing browser instance
-      console.log('api tested')
-      browser = await puppeteer.connect({ browserWSEndpoint: process.env.API })
-    } else {
-      // If the API URL is not present, launch a new browser instance
-      browser = await puppeteer.launch()
-    }
+    browser = await puppeteer.launch({
+      headless: true, // Убедитесь, что браузер запущен в headless режиме
+      args: ['--no-sandbox', '--disable-setuid-sandbox'], // Опции для Puppeteer
+    })
+
     const page = await browser.newPage()
-    console.log(url)
-    await page.goto(url)
+    console.log('Navigating to URL:', url)
+    await page.goto(url, { waitUntil: 'networkidle2' })
+
+    // Увеличьте время ожидания для загрузки динамического контента
+    await new Promise((r) => setTimeout(r, 5000))
+
     const extractedText = await page.$eval('*', (el: any) => el.innerText)
-    console.log(extractedText)
+    console.log('Extracted Text:', extractedText)
+
     if (browser) {
       await browser.close()
     }
@@ -34,7 +38,7 @@ export async function POST(request: Request) {
     if (browser) {
       await browser.close()
     }
-    console.error(error)
+    console.error('Error occurred:', error)
     return NextResponse.json({ error })
   }
 }
