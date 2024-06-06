@@ -1,37 +1,28 @@
-'use client'
+import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts'
 
-import { PieChart as PieRechart, Pie, ResponsiveContainer } from 'recharts'
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28']
 
-import { PieChartProps } from '@/app/types'
-import Tooltip from './Tooltip'
+const PieChartComponent = ({ data, title }) => (
+  <div>
+    <h3>{title}</h3>
+    <PieChart width={400} height={400}>
+      <Pie
+        data={data}
+        cx={200}
+        cy={200}
+        labelLine={false}
+        outerRadius={80}
+        fill="#8884d8"
+        dataKey="value"
+      >
+        {data.map((entry, index) => (
+          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+        ))}
+      </Pie>
+      <Tooltip />
+      <Legend />
+    </PieChart>
+  </div>
+)
 
-const PieChart = ({
-	width = '100%',
-	height = 350,
-	data,
-	colors,
-	dataKeys,
-	nameKeys,
-	children,
-	label = true,
-}: PieChartProps) => {
-	return (
-		<ResponsiveContainer width={width} height={height}>
-			<PieRechart>
-				{children}
-				{data.map((data, index) => (
-					<Pie
-						dataKey={dataKeys[index]}
-						nameKey={nameKeys[index]}
-						data={data}
-						key={index}
-						fill={colors ? `${colors[index]}` : 'black'}
-						label
-					/>
-				))}
-			</PieRechart>
-		</ResponsiveContainer>
-	)
-}
-
-export default PieChart
+export default PieChartComponent

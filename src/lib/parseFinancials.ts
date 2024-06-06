@@ -31,5 +31,5 @@ export function parseFinancials(rawText: string) {
     }
   }
 
-  return result
+  return JSON.stringify(result, null, 2)
 }

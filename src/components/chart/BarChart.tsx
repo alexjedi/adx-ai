@@ -1,35 +1,27 @@
-'use client'
-import React from 'react'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
-import { Bar, BarChart as BarRechart, ResponsiveContainer } from 'recharts'
-import { BarChartProps } from '@/app/types'
+const BarChartComponent = ({ data, title, xKey, yKey }) => (
+  <div>
+    <h3>{title}</h3>
+    <BarChart
+      width={500}
+      height={300}
+      data={data}
+      margin={{
+        top: 5,
+        right: 30,
+        left: 20,
+        bottom: 5,
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey={xKey} />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      <Bar dataKey={yKey} fill="#8884d8" />
+    </BarChart>
+  </div>
+)
 
-const BarChart = ({
-	width = '100%',
-	height = 350,
-	data,
-	colors,
-	dataKeys,
-	stack = false,
-	children,
-}: BarChartProps) => {
-	return (
-		<ResponsiveContainer width={width} height={height}>
-			<BarRechart data={data}>
-				{children}
-				{dataKeys.map((dkey, index) => (
-					<Bar
-						radius={[4, 4, 0, 0]}
-						key={index}
-						stackId={stack ? 1 : index}
-						dataKey={dkey}
-						fill={colors ? colors[index] : 'black'}
-						fillOpacity={1}
-					/>
-				))}
-			</BarRechart>
-		</ResponsiveContainer>
-	)
-}
-
-export default BarChart
+export default BarChartComponent
