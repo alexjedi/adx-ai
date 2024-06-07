@@ -25,27 +25,29 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { ThemeSelector } from './ThemeSelector'
+import Image from 'next/image'
+import logo from '@/app/apple-touch-icon.png'
 
 const Navigation: React.FC = () => {
   return (
-    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+    <header className="sticky top-0 flex h-20 items-center gap-4 bg-background px-4 md:px-8 z-10">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
-        <Link href="" className="flex items-center gap-2 text-lg font-semibold md:text-base">
-          <AlignHorizontalDistributeCenter className="h-6 w-6" />
-          <span className="sr-only">Acme Inc</span>
-        </Link>
-        <Link href="/" className="text-muted-foreground transition-colors hover:text-foreground">
+        <Image src={logo} className="size-8" alt="logo" />
+        <Link
+          href="/"
+          className="text-base font-medium text-foreground transition-colors hover:text-foreground"
+        >
           Dashboard
         </Link>
         <Link
           href="/sandbox"
-          className="text-muted-foreground transition-colors hover:text-foreground"
+          className="text-base font-medium text-foreground transition-colors hover:text-foreground"
         >
           Sandbox
         </Link>
         <Link
           href="/preview"
-          className="text-muted-foreground transition-colors hover:text-foreground"
+          className="text-base font-medium text-foreground transition-colors hover:text-foreground"
         >
           Preview
         </Link>
@@ -59,27 +61,23 @@ const Navigation: React.FC = () => {
         </SheetTrigger>
         <SheetContent side="left">
           <nav className="grid gap-6 text-lg font-medium">
-            <Link href="" className="flex items-center gap-2 text-lg font-semibold md:text-base">
-              <AlignHorizontalDistributeCenter className="h-6 w-6" />
-              <span className="sr-only">Acme Inc</span>
+            <Link
+              href="/"
+              className="text-base font-medium text-foreground transition-colors hover:text-foreground"
+            >
+              Dashboard
             </Link>
             <Link
-              href="/scrapper"
-              className="text-foreground transition-colors hover:text-foreground"
+              href="/sandbox"
+              className="text-base font-medium text-foreground transition-colors hover:text-foreground"
             >
-              Scrapper
+              Sandbox
             </Link>
             <Link
-              href="#"
-              className="text-muted-foreground transition-colors hover:text-foreground"
+              href="/preview"
+              className="text-base font-medium text-foreground transition-colors hover:text-foreground"
             >
-              Screenshoter
-            </Link>
-            <Link
-              href="#"
-              className="text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Charts
+              Preview
             </Link>
           </nav>
         </SheetContent>
@@ -87,22 +85,19 @@ const Navigation: React.FC = () => {
       <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
         <form className="ml-auto flex-1 sm:flex-initial">
           <div className="relative">
-            <Button variant="outline" className="flex space-x-2">
+            <div className="flex space-x-2 bg-secondary px-4 py-2 items-center rounded-full">
               <Search className="h-4 w-4 text-muted-foreground" />
-              <span>Enter ADX ticker</span>
-              <p className="text-xs text-muted-foreground">
-                Press{' '}
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  <span className="text-xs">⌘</span>K
-                </kbd>
+              <span className="text-sm text-muted-foreground font-medium">Enter ADX ticker</span>
+              <p className="text-sm text-muted-foreground">
+                <span className="text-xs">⌘</span>K
               </p>
-            </Button>
+            </div>
           </div>
         </form>
         <ThemeSelector />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="secondary" size="icon" className="rounded-full">
+            <Button variant="ghost" size="icon" className="rounded-full">
               <CircleUser className="h-5 w-5" />
               <span className="sr-only">Toggle user menu</span>
             </Button>
