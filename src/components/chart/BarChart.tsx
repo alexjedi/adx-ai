@@ -1,14 +1,33 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts'
 
-const BarChartComponent = ({ data, title, xKey, yKey }) => (
-  <div>
-    <h3>{title}</h3>
+const COLORS = ['#2c0d68', '#7733f4', '#a387fe', '#F9A88F', '#39C7FF']
+
+const BarChartComponent = ({
+  data,
+  xKey,
+  yKey,
+  y2Key,
+}: {
+  data: { [key: string]: string | number }[]
+  xKey: string
+  yKey: string
+  y2Key?: string
+}) => (
+  <ResponsiveContainer width="100%" height={300}>
     <BarChart
-      width={500}
       height={300}
       data={data}
       margin={{
-        top: 5,
+        top: 30,
         right: 30,
         left: 20,
         bottom: 5,
@@ -19,9 +38,10 @@ const BarChartComponent = ({ data, title, xKey, yKey }) => (
       <YAxis />
       <Tooltip />
       <Legend />
-      <Bar dataKey={yKey} fill="#8884d8" />
+      <Bar dataKey={yKey} fill={COLORS[0]} />
+      {y2Key && <Bar dataKey={y2Key} fill={COLORS[1]} />}
     </BarChart>
-  </div>
+  </ResponsiveContainer>
 )
 
 export default BarChartComponent

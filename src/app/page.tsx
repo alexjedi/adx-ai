@@ -12,6 +12,7 @@ import {
   Package2,
   PercentSquare,
   Printer,
+  RefreshCcw,
   Search,
   Slash,
   Users,
@@ -57,7 +58,7 @@ export default function Dashboard() {
   const [open, setOpen] = useState(false)
   const [extractedFinancials, setExtractedFinancials] = useState('')
   const [extractedOverview, setExtractedOverview] = useState('')
-  const [ticker, setTicker] = useState('')
+  const [ticker, setTicker] = useState('ADIB')
   const [url, setURL] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -81,10 +82,10 @@ export default function Dashboard() {
     setTicker(ticker)
     setLoading(true)
     console.log('Selected:', ticker)
-    const extractedFinance = await scrapePageFinancials(ticker)
-    const extractedOver = await scrapePageOverview(ticker)
-    setExtractedFinancials(extractedFinance)
-    setExtractedOverview(extractedOver)
+    // const extractedFinance = await scrapePageFinancials(ticker)
+    // const extractedOver = await scrapePageOverview(ticker)
+    // setExtractedFinancials(extractedFinance)
+    // setExtractedOverview(extractedOver)
     setLoading(false)
   }
 
@@ -106,20 +107,20 @@ export default function Dashboard() {
               <Slash className="size-4 text-muted-foreground" />
             </BreadcrumbSeparator>
             <BreadcrumbItem>
-              <BreadcrumbLink href="/components">Finance</BreadcrumbLink>
+              <BreadcrumbLink href="/components">{data[ticker].overview.sector}</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator>
               <Slash className="size-4 text-muted-foreground" />
             </BreadcrumbSeparator>
             <BreadcrumbItem>
-              <BreadcrumbPage>ADIB</BreadcrumbPage>
+              <BreadcrumbPage>{ticker}</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
         <section className="flex items-start py-2">
           <div className="relative w-24 h-24 mr-4">
             <Image
-              src={adiblogo}
+              src={data[ticker].overview.logo || adiblogo}
               alt="Abu Dhabi Islamic Bank Logo"
               layout="fill"
               objectFit="contain"
@@ -128,15 +129,19 @@ export default function Dashboard() {
           </div>
           <div className="flex flex-col flex-grow">
             <div className="flex flex-col items-start space-y-4">
-              <h1 className="text-3xl font-semibold">Abu Dhabi Islamic Bank</h1>
+              <h1 className="text-3xl font-semibold">{data[ticker].overview.name}</h1>
               <Button variant="outline" className="px-4 font-medium">
-                ADIB - Abu Dhabi Securities Exchange
+                {data[ticker].overview.symbolOnADX} - Abu Dhabi Securities Exchange
               </Button>
               <div className="text-foreground text-base font-medium">
                 10.90 AED<span className="text-green-600 text-sm ml-1">(+0.93%)</span>
               </div>
             </div>
           </div>
+          <Button variant="outline" className="ml-auto mr-4">
+            <RefreshCcw className="h-4 w-4 mr-2" />
+            Refresh
+          </Button>
           <Button variant="outline" className="ml-auto">
             <Printer className="h-4 w-4 mr-2" />
             Print Overview
@@ -147,32 +152,123 @@ export default function Dashboard() {
             <TabsList>
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="financials">Financials</TabsTrigger>
+              <TabsTrigger value="ptofile">Profile</TabsTrigger>
+              <TabsTrigger value="technicals">Technicals</TabsTrigger>
             </TabsList>
             <TabsContent value="overview">
-              <div className="py-2 space-y-8">
-                <section className="flex justify-between space-x-4">
-                  <PieChart data={data.keyShareholders} title="Key Shareholders" />
-                  <PieChart data={data.stockOwnership} title="Stock Ownership" />
+              <div className="pt-8 space-y-8">
+                <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+                  <Card x-chunk="dashboard-01-chunk-2">
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                      <CardTitle className="text-sm font-medium">Sector</CardTitle>
+                      <CreditCard className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-xl font-medium">{data[ticker].overview.sector}</div>
+                    </CardContent>
+                  </Card>
+                  <Card x-chunk="dashboard-01-chunk-3">
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                      <CardTitle className="text-sm font-medium">Incorporation</CardTitle>
+                      <Activity className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-xl font-medium">
+                        {data[ticker].overview.incorporation}
+                      </div>
+                    </CardContent>
+                  </Card>
+                  <Card x-chunk="dashboard-01-chunk-3">
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                      <CardTitle className="text-sm font-medium">Listing Date</CardTitle>
+                      <Activity className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-xl font-medium">{data[ticker].overview.listing}</div>
+                    </CardContent>
+                  </Card>
+                  <Card x-chunk="dashboard-01-chunk-3">
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                      <CardTitle className="text-sm font-medium">Share Capital</CardTitle>
+                      <Activity className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-xl font-medium">
+                        {data[ticker].overview.sharecapital}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+                <section className="flex justify-between space-x-8">
+                  <Card x-chunk="dashboard-01-chunk-3" className="w-full">
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                      <CardTitle className="text-sm font-medium">Key Shareholders</CardTitle>
+                      <Activity className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent className="w-full">
+                      <PieChart data={data[ticker].keyShareholders} />
+                    </CardContent>
+                  </Card>
+                  <Card x-chunk="dashboard-01-chunk-3" className="w-full">
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                      <CardTitle className="text-sm font-medium">Stock Ownership</CardTitle>
+                      <Activity className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent className="w-full">
+                      <PieChart data={data[ticker].stockOwnership} />
+                    </CardContent>
+                  </Card>
                 </section>
                 <section className="flex justify-between space-x-4">
-                  <BarChart data={data.dividends} title="Dividends" xKey="year" yKey="dividend" />
-                  <LineChart
-                    data={data.periodicalReturn}
-                    title="Periodical Return (%)"
-                    xKey="year"
-                    yKey="value"
-                  />
+                  <Card x-chunk="dashboard-01-chunk-3" className="w-full">
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                      <CardTitle className="text-sm font-medium">Dividents</CardTitle>
+                      <Activity className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent className="w-full">
+                      <BarChart
+                        data={data[ticker].dividends}
+                        xKey="year"
+                        yKey="dividend"
+                        y2Key="yield"
+                      />
+                    </CardContent>
+                  </Card>
+                  <Card x-chunk="dashboard-01-chunk-3" className="w-full">
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                      <CardTitle className="text-sm font-medium">Highs & Lows (AED)</CardTitle>
+                      <Activity className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent className="w-full flex space-x-4">
+                      <PieChart
+                        isOnlyValue
+                        data={[
+                          { name: '52 Week High', value: data[ticker].highsLows.high },
+                          { name: '100%', value: 100 - data[ticker].highsLows.high },
+                        ]}
+                      />
+                      <PieChart
+                        isOnlyValue
+                        data={[
+                          { name: '52 Week Low', value: data[ticker].highsLows.low },
+                          { name: '100%', value: 100 - data[ticker].highsLows.low },
+                        ]}
+                      />
+                    </CardContent>
+                  </Card>
                 </section>
                 <section className="space-y-6">
                   <h3 className="text-2xl font-medium">Key Statistics</h3>
-                  <div className="w-full grid grid-cols-4 gap-6">
+                  <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-6">
                     <Card>
                       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="font-medium text-base">P/E Ratio:</CardTitle>
                         <PercentSquare className="h-4 w-4 text-muted-foreground" />
                       </CardHeader>
                       <CardContent>
-                        <div className="text-xl font-semibold">{data.keyStatistics.peRatio}</div>
+                        <div className="text-xl font-semibold">
+                          {data[ticker].keyStatistics.peRatio}
+                        </div>
                       </CardContent>
                     </Card>
                     <Card>
@@ -182,7 +278,7 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-xl font-semibold">
-                          {data.keyStatistics.priceToSales}
+                          {data[ticker].keyStatistics.priceToSales}
                         </div>
                       </CardContent>
                     </Card>
@@ -193,7 +289,7 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-xl font-semibold">
-                          {data.keyStatistics.priceToBook}
+                          {data[ticker].keyStatistics.priceToBook}
                         </div>
                       </CardContent>
                     </Card>
@@ -204,7 +300,7 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-xl font-semibold">
-                          {data.keyStatistics.priceToCashFlow}
+                          {data[ticker].keyStatistics.priceToCashFlow}
                         </div>
                       </CardContent>
                     </Card>
@@ -215,7 +311,7 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-xl font-semibold">
-                          {data.keyStatistics.debtToEquity}
+                          {data[ticker].keyStatistics.debtToEquity}
                         </div>
                       </CardContent>
                     </Card>
@@ -228,7 +324,7 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-xl font-semibold">
-                          {data.keyStatistics.longTermDebtToEquity}
+                          {data[ticker].keyStatistics.longTermDebtToEquity}
                         </div>
                       </CardContent>
                     </Card>
@@ -239,29 +335,107 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-xl font-semibold">
-                          {data.keyStatistics.returnOnEquity}
+                          {data[ticker].keyStatistics.returnOnEquity}
                         </div>
                       </CardContent>
                     </Card>
                   </div>
                 </section>
-                <div>
-                  <h3>Growth</h3>
-                  <p>Revenue Growth (Quarterly YoY): {data.growth.revenueGrowthYoY}</p>
-                  <p>Revenue Growth Rate (5Y): {data.growth.revenueGrowth5Y}</p>
-                  <p>EPS Growth (Quarterly YoY): {data.growth.epsGrowthYoY}</p>
-                  <p>EPS Growth (TTM YoY): {data.growth.epsGrowthTTM}</p>
-                  <p>EPS Growth Rate (5Y): {data.growth.epsGrowth5Y}</p>
-                  <p>EPS Growth Rate (3Y): {data.growth.epsGrowth3Y}</p>
-                </div>
-                <div>
-                  <h3>Highs & Lows (AED)</h3>
-                  <p>52 Week High: {data.highsLows.high}</p>
-                  <p>52 Week Low: {data.highsLows.low}</p>
-                </div>
+                <section className="space-y-6">
+                  <h3 className="text-2xl font-medium">Growth</h3>
+                  <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-6">
+                    <Card>
+                      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="font-medium text-base">
+                          Revenue Growth (Quarterly YoY):
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-xl font-semibold">
+                          {data[ticker].growth.revenueGrowthYoY}
+                        </div>
+                      </CardContent>
+                    </Card>
+                    <Card>
+                      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="font-medium text-base">
+                          Revenue Growth Rate (5Y):
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-xl font-semibold">
+                          {data[ticker].growth.revenueGrowth5Y}
+                        </div>
+                      </CardContent>
+                    </Card>
+                    <Card>
+                      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="font-medium text-base">
+                          EPS Growth (Quarterly YoY):
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-xl font-semibold">
+                          {data[ticker].growth.epsGrowthYoY}
+                        </div>
+                      </CardContent>
+                    </Card>
+                    <Card>
+                      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="font-medium text-base">
+                          EPS Growth (TTM YoY):
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-xl font-semibold">
+                          {data[ticker].growth.epsGrowthTTM}
+                        </div>
+                      </CardContent>
+                    </Card>
+                    <Card>
+                      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="font-medium text-base">
+                          EPS Growth Rate (5Y):
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-xl font-semibold">
+                          {data[ticker].growth.epsGrowth5Y}
+                        </div>
+                      </CardContent>
+                    </Card>
+                    <Card>
+                      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="font-medium text-base">
+                          EPS Growth Rate (3Y):
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-xl font-semibold">
+                          {data[ticker].growth.epsGrowth3Y}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                  <Card>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                      <CardTitle className="font-medium text-base">Periodical Return (%)</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <LineChart
+                        data={data[ticker].periodicalReturn}
+                        Key1={'totalReturn'}
+                        Key2={'ADIB Stock'}
+                        Key3={'Return on Reinvested Dividends'}
+                      />
+                    </CardContent>
+                  </Card>
+                </section>
               </div>
             </TabsContent>
             <TabsContent value="financials">Change your password here.</TabsContent>
+            <TabsContent value="ptofile">Change your password here.</TabsContent>
+            <TabsContent value="technicals">Change your password here.</TabsContent>
           </Tabs>
           <CommandDialog open={open} onOpenChange={setOpen}>
             <CommandInput placeholder="Type a command or search..." />
@@ -290,62 +464,6 @@ export default function Dashboard() {
             </CommandList>
           </CommandDialog>
         </section>
-        <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-6">
-          <Card x-chunk="dashboard-01-chunk-0">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Name</CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-xl font-medium">{data.overview.name}</div>
-            </CardContent>
-          </Card>
-          <Card x-chunk="dashboard-01-chunk-1">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Symbol on ADX</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-xl font-medium">{data.overview.symbolOnADX}</div>
-            </CardContent>
-          </Card>
-          <Card x-chunk="dashboard-01-chunk-2">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Sector</CardTitle>
-              <CreditCard className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-xl font-medium">{data.overview.sector}</div>
-            </CardContent>
-          </Card>
-          <Card x-chunk="dashboard-01-chunk-3">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Incorporation</CardTitle>
-              <Activity className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-xl font-medium">{data.overview.incorporation}</div>
-            </CardContent>
-          </Card>
-          <Card x-chunk="dashboard-01-chunk-3">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Listing Date</CardTitle>
-              <Activity className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-xl font-medium">{data.overview.listing}</div>
-            </CardContent>
-          </Card>
-          <Card x-chunk="dashboard-01-chunk-3">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Share Capital</CardTitle>
-              <Activity className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-xl font-medium">{data.overview.sharecapital}</div>
-            </CardContent>
-          </Card>
-        </div>
       </main>
     </div>
   )
