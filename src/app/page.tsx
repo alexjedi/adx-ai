@@ -76,7 +76,7 @@ export default function Dashboard() {
   const [ticker, setTicker] = useState('ADIB')
   const [url, setURL] = useState('')
   const [loading, setLoading] = useState(true)
-  const printRef = useRef()
+  const printRef = useRef<HTMLDivElement>(null)
   const [isHorizontalBarChart, setIsHorizontalBarChart] = useState(true)
   const contentToPrint = useRef(null)
   const handlePrint = useReactToPrint({
@@ -85,7 +85,7 @@ export default function Dashboard() {
   })
 
   const handleDownloadImage = async () => {
-    const element = printRef.current
+    const element = printRef.current as unknown as HTMLElement | null
     if (!element) return
 
     const canvas = await html2canvas(element)
@@ -104,7 +104,6 @@ export default function Dashboard() {
       window.open(data)
     }
   }
-
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
