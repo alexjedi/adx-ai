@@ -17,7 +17,7 @@ const BarChartComponent = ({
   yKey,
   y2Key,
 }: {
-  data: { [key: string]: string | number }[]
+  data: any[]
   xKey: string
   yKey: string
   y2Key?: string

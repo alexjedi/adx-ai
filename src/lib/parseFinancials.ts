@@ -15,7 +15,7 @@ export function parseFinancials(rawText: string) {
   ]
 
   let currentTitle = ''
-  const result = {}
+  const result: { [key: string]: any } = {}
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]

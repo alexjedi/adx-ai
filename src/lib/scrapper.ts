@@ -25,7 +25,7 @@ export async function scrapePageFinancials(ticker: string) {
       return 'URL cannot be loaded'
     }
   } catch (error) {
-    console.error('Error:', error.message)
+    console.error('Error:', (error as Error).message)
     return 'Vercel timeout error. Please setup project locally'
   }
 }
@@ -55,7 +55,7 @@ export async function scrapePageOverview(ticker: string) {
       return 'URL cannot be loaded'
     }
   } catch (error) {
-    console.error('Error:', error.message)
+    console.error('Error:', (error as Error).message)
     return 'Vercel timeout error. Please setup project locally'
   }
 }

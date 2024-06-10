@@ -2,18 +2,22 @@
 import React from 'react'
 
 import { Area, AreaChart as AreaRechart, ResponsiveContainer } from 'recharts'
-import { AreaChartProps } from '@/app/types'
-import { DataKey } from 'recharts/types/util/types'
 
 const AreaChart = ({
   width = '100%',
   height = 350,
   data,
   colors,
-  dataKeys,
   stack = false,
   children,
-}: AreaChartProps) => {
+}: {
+  width?: string
+  height?: number
+  data: any[]
+  colors?: string[]
+  stack?: boolean
+  children?: React.ReactNode
+}) => {
   return (
     <ResponsiveContainer width={width} height={height}>
       <AreaRechart data={data}>
@@ -33,13 +37,11 @@ const AreaChart = ({
           ))}
         </defs>
         {children}
-        {dataKeys.map((dkey: DataKey<any>, index: React.Key | null | undefined) => (
+        {data.map((dkey, index) => (
           <Area
             key={index}
-            // @ts-ignore
             stackId={stack ? 1 : index}
             dataKey={dkey}
-            // @ts-ignore
             stroke={colors ? colors[index] : 'black'}
             strokeWidth={2}
             fillOpacity={1}

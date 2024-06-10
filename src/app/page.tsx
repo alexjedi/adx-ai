@@ -67,7 +67,7 @@ import Image from 'next/image'
 import html2canvas from 'html2canvas'
 import HorizontalBarChart from '@/components/chart/HorizontalBarChart'
 import { useReactToPrint } from 'react-to-print'
-import { Data } from '@/app/types'
+import { Data } from '@/lib/types'
 
 export default function Dashboard() {
   const [open, setOpen] = useState(false)

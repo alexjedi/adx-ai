@@ -15,7 +15,7 @@ interface DataKeyShareholder {
   value: number
 }
 
-interface DataStockOwnership {
+export interface DataStockOwnership {
   name: string
   value: number
 }
@@ -130,13 +130,15 @@ interface DataFinancials {
 }
 
 export interface Data {
-  overview: DataOverview
-  keyShareholders: DataKeyShareholder[]
-  stockOwnership: DataStockOwnership[]
-  keyStatistics: DataKeyStatistics
-  growth: DataGrowth
-  dividends: DataDividend[]
-  highsLows: DataHighsLows
-  periodicalReturn: DataPeriodicalReturn[]
-  financials: DataFinancials
+  [ticker: string]: {
+    overview: DataOverview
+    keyShareholders: DataKeyShareholder[]
+    stockOwnership: DataStockOwnership[]
+    keyStatistics: DataKeyStatistics
+    growth: DataGrowth
+    dividends: DataDividend[]
+    highsLows: DataHighsLows
+    periodicalReturn: DataPeriodicalReturn[]
+    financials: DataFinancials
+  }
 }

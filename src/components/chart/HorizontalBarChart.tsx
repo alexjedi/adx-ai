@@ -1,3 +1,4 @@
+import { DataStockOwnership } from '@/lib/types'
 import {
   BarChart,
   Bar,
@@ -19,7 +20,7 @@ const HorizontalBarChart = ({
   yKey,
   y2Key,
 }: {
-  data: { [key: string]: string | number }[]
+  data: DataStockOwnership[]
   xKey: string
   yKey: string
   y2Key?: string

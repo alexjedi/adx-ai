@@ -25,7 +25,7 @@ export function generateTVURL(ticker: string) {
 }
 
 export function generateADXURL(ticker: string) {
-  const tickers = {
+  const tickers: { [key: string]: string } = {
     FAB: 'AEN000101016',
     ADIB: 'AEA000801018',
     ADNOCDIST: 'AEA006101017',
@@ -46,7 +46,7 @@ export function generateADXURL(ticker: string) {
     'https://www.adx.ae/English/Pages/ProductsAndServices/Securities/SelectCompany/default.aspx'
   const params = new URLSearchParams({
     listedcompanyid: companyId,
-    pnavTitle: companyTitles[ticker],
+    pnavTitle: companyTitles[ticker as keyof typeof companyTitles],
   })
 
   return `${baseURL}?${params.toString()}`
