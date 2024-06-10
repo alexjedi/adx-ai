@@ -4,16 +4,14 @@ export async function scrapePageFinancials(ticker: string) {
   const url = generateTVURL(ticker)
 
   try {
-    const response = await fetch(
-      process.env.NEXT_PUBLIC_APP || 'http://localhost:3000/api/tv-scrapper',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ url }),
-      }
-    )
+    const response = await fetch('/api/tv-scrapper', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify({ url }),
+    })
 
     const data = await response.json()
 
@@ -36,16 +34,14 @@ export async function scrapePageOverview(ticker: string) {
   const url = generateADXURL(ticker)
 
   try {
-    const response = await fetch(
-      process.env.NEXT_PUBLIC_APP || 'http://localhost:3000/api/adx-scrapper',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ url }),
-      }
-    )
+    const response = await fetch('/api/adx-scrapper', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify({ url }),
+    })
 
     const data = await response.json()
     console.log('data', data)
