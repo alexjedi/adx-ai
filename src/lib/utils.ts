@@ -51,3 +51,20 @@ export function generateADXURL(ticker: string) {
 
   return `${baseURL}?${params.toString()}`
 }
+
+export function formatPropertyValue(value: string): string {
+  const num = parseFloat(value.replace(/,/g, ''))
+  if (isNaN(num)) {
+    throw new Error('Invalid number')
+  }
+
+  if (num >= 1e9) {
+    return (num / 1e9).toFixed(2) + 'B'
+  } else if (num >= 1e6) {
+    return (num / 1e6).toFixed(2) + 'M'
+  } else if (num >= 1e3) {
+    return (num / 1e3).toFixed(2) + 'K'
+  } else {
+    return num.toFixed(2)
+  }
+}

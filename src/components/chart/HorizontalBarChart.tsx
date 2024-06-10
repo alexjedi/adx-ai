@@ -7,11 +7,13 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  Cell,
+  LabelList,
 } from 'recharts'
 
 const COLORS = ['#2c0d68', '#7733f4', '#a387fe', '#F9A88F', '#39C7FF']
 
-const BarChartComponent = ({
+const HorizontalBarChart = ({
   data,
   xKey,
   yKey,
@@ -26,23 +28,26 @@ const BarChartComponent = ({
     <BarChart
       height={300}
       data={data}
+      layout="vertical"
       margin={{
         top: 30,
-        right: 30,
-        left: 20,
+        right: 20,
+        left: 40,
         bottom: 5,
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey={xKey} />
-      <YAxis yAxisId="left" orientation="left" stroke={COLORS[0]} />
-      {y2Key && <YAxis yAxisId="right" orientation="right" stroke={COLORS[1]} />}
-      <Tooltip />
+      <XAxis type="number" domain={[0, 100]} />
+      <YAxis type="category" dataKey={xKey} stroke={COLORS[0]} />
       <Legend />
-      <Bar dataKey={yKey} yAxisId="left" fill={COLORS[0]} />
-      {y2Key && <Bar dataKey={y2Key} yAxisId="right" fill={COLORS[1]} />}
+      <Bar dataKey={yKey} fill={COLORS[0]}>
+        {data.map((entry, index) => (
+          <Cell key={`cell-${index}`} fill={COLORS[index]} />
+        ))}
+        <LabelList dataKey={yKey} position="right" />
+      </Bar>
     </BarChart>
   </ResponsiveContainer>
 )
 
-export default BarChartComponent
+export default HorizontalBarChart
