@@ -67,6 +67,7 @@ import Image from 'next/image'
 import html2canvas from 'html2canvas'
 import HorizontalBarChart from '@/components/chart/HorizontalBarChart'
 import { useReactToPrint } from 'react-to-print'
+import { Data } from '@/app/types'
 
 export default function Dashboard() {
   const [open, setOpen] = useState(false)
@@ -85,6 +86,8 @@ export default function Dashboard() {
 
   const handleDownloadImage = async () => {
     const element = printRef.current
+    if (!element) return
+
     const canvas = await html2canvas(element)
 
     const data = canvas.toDataURL('image/jpg')
@@ -152,7 +155,7 @@ export default function Dashboard() {
         {Object.entries(data).map(([key, value]) => (
           <li key={key} className="flex justify-between py-1">
             <span className="text-muted-foreground">{key}</span>
-            <span className="font-medium">{value ?? 'N/A'}</span>
+            <span className="font-medium">{(value as React.ReactNode) ?? 'N/A'}</span>
           </li>
         ))}
       </ul>
@@ -193,7 +196,9 @@ export default function Dashboard() {
                 <Slash className="size-4 text-muted-foreground" />
               </BreadcrumbSeparator>
               <BreadcrumbItem>
-                <BreadcrumbLink href="/components">{data[ticker].overview.sector}</BreadcrumbLink>
+                <BreadcrumbLink href="/components">
+                  {(data as Data)[ticker]?.overview?.sector}
+                </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator>
                 <Slash className="size-4 text-muted-foreground" />
@@ -206,7 +211,7 @@ export default function Dashboard() {
           <section className="flex items-start py-2">
             <div className="relative w-24 h-24 mr-4">
               <Image
-                src={data[ticker].overview.logo || adiblogo}
+                src={(data as Data)[ticker]?.overview.logo || adiblogo}
                 alt="Logo"
                 layout="fill"
                 objectFit="contain"
@@ -215,12 +220,12 @@ export default function Dashboard() {
             </div>
             <div className="flex flex-col flex-grow">
               <div className="flex flex-col items-start space-y-4">
-                <h1 className="text-3xl font-semibold">{data[ticker].overview.name}</h1>
+                <h1 className="text-3xl font-semibold">{(data as Data)[ticker]?.overview.name}</h1>
                 <Button variant="outline" className="px-4 font-medium">
-                  {data[ticker].overview.symbolOnADX} - Abu Dhabi Securities Exchange
+                  {(data as Data)[ticker]?.overview.symbolOnADX} - Abu Dhabi Securities Exchange
                 </Button>
                 <div className="text-foreground text-base font-medium">
-                  {data[ticker].overview.price} AED
+                  {(data as Data)[ticker]?.overview.price} AED
                   <span className="text-green-600 text-sm ml-1">(+0.93%)</span>
                 </div>
               </div>
@@ -260,7 +265,9 @@ export default function Dashboard() {
                         <Factory className="h-4 w-4 text-muted-foreground" />
                       </CardHeader>
                       <CardContent>
-                        <div className="text-xl font-medium">{data[ticker].overview.sector}</div>
+                        <div className="text-xl font-medium">
+                          {(data as Data)[ticker]?.overview.sector}
+                        </div>
                       </CardContent>
                     </Card>
                     <Card x-chunk="dashboard-01-chunk-3">
@@ -270,7 +277,7 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-xl font-medium">
-                          {data[ticker].overview.incorporation}
+                          {(data as Data)[ticker]?.overview.incorporation}
                         </div>
                       </CardContent>
                     </Card>
@@ -280,7 +287,9 @@ export default function Dashboard() {
                         <FilePlus className="h-4 w-4 text-muted-foreground" />
                       </CardHeader>
                       <CardContent>
-                        <div className="text-xl font-medium">{data[ticker].overview.listing}</div>
+                        <div className="text-xl font-medium">
+                          {(data as Data)[ticker]?.overview.listing}
+                        </div>
                       </CardContent>
                     </Card>
                     <Card x-chunk="dashboard-01-chunk-3">
@@ -290,7 +299,7 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-xl font-medium">
-                          {formatPropertyValue(data[ticker].overview.sharecapital)}
+                          {formatPropertyValue((data as Data)[ticker]?.overview.sharecapital)}
                         </div>
                       </CardContent>
                     </Card>
@@ -305,7 +314,7 @@ export default function Dashboard() {
                         </Button>
                       </CardHeader>
                       <CardContent className="w-full">
-                        <PieChart data={data[ticker].keyShareholders} />
+                        <PieChart data={(data as Data)[ticker]?.keyShareholders} />
                       </CardContent>
                     </Card>
                     <Card x-chunk="dashboard-01-chunk-3" className="w-full">
@@ -321,12 +330,12 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent className="w-full">
                         {isHorizontalBarChart ? (
-                          <PieChart data={data[ticker].stockOwnership} />
+                          <PieChart data={(data as Data)[ticker]?.stockOwnership} />
                         ) : (
                           <HorizontalBarChart
                             xKey="name"
                             yKey="value"
-                            data={data[ticker].stockOwnership}
+                            data={(data as Data)[ticker]?.stockOwnership}
                           />
                         )}
                       </CardContent>
@@ -342,7 +351,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {data[ticker].keyStatistics.peRatio}
+                            {(data as Data)[ticker]?.keyStatistics.peRatio}
                           </div>
                         </CardContent>
                       </Card>
@@ -353,7 +362,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {data[ticker].keyStatistics.priceToSales}
+                            {(data as Data)[ticker]?.keyStatistics.priceToSales}
                           </div>
                         </CardContent>
                       </Card>
@@ -364,7 +373,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {data[ticker].keyStatistics.priceToBook}
+                            {(data as Data)[ticker]?.keyStatistics.priceToBook}
                           </div>
                         </CardContent>
                       </Card>
@@ -377,7 +386,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {data[ticker].keyStatistics.priceToCashFlow}
+                            {(data as Data)[ticker]?.keyStatistics.priceToCashFlow}
                           </div>
                         </CardContent>
                       </Card>
@@ -390,7 +399,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {data[ticker].keyStatistics.debtToEquity}
+                            {(data as Data)[ticker]?.keyStatistics.debtToEquity}
                           </div>
                         </CardContent>
                       </Card>
@@ -403,7 +412,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {data[ticker].keyStatistics.longTermDebtToEquity}
+                            {(data as Data)[ticker]?.keyStatistics.longTermDebtToEquity}
                           </div>
                         </CardContent>
                       </Card>
@@ -414,7 +423,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {data[ticker].keyStatistics.returnOnEquity}
+                            {(data as Data)[ticker]?.keyStatistics.returnOnEquity}
                           </div>
                         </CardContent>
                       </Card>
@@ -432,7 +441,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {data[ticker].growth.revenueGrowthYoY}
+                            {(data as Data)[ticker]?.growth.revenueGrowthYoY}
                           </div>
                         </CardContent>
                       </Card>
@@ -445,7 +454,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {data[ticker].growth.revenueGrowth5Y}
+                            {(data as Data)[ticker]?.growth.revenueGrowth5Y}
                           </div>
                         </CardContent>
                       </Card>
@@ -458,7 +467,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {data[ticker].growth.epsGrowthYoY}
+                            {(data as Data)[ticker]?.growth.epsGrowthYoY}
                           </div>
                         </CardContent>
                       </Card>
@@ -471,7 +480,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {data[ticker].growth.epsGrowthTTM}
+                            {(data as Data)[ticker]?.growth.epsGrowthTTM}
                           </div>
                         </CardContent>
                       </Card>
@@ -484,7 +493,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {data[ticker].growth.epsGrowth5Y}
+                            {(data as Data)[ticker]?.growth.epsGrowth5Y}
                           </div>
                         </CardContent>
                       </Card>
@@ -497,7 +506,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {data[ticker].growth.epsGrowth3Y}
+                            {(data as Data)[ticker]?.growth.epsGrowth3Y}
                           </div>
                         </CardContent>
                       </Card>
@@ -511,7 +520,7 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent className="w-full">
                         <BarChart
-                          data={data[ticker].dividends}
+                          data={(data as Data)[ticker]?.dividends}
                           xKey="year"
                           yKey="dividend"
                           y2Key="yield"
@@ -527,15 +536,15 @@ export default function Dashboard() {
                         <PieChart
                           isOnlyValue
                           data={[
-                            { name: '52 Week High', value: data[ticker].highsLows.high },
-                            { name: '100%', value: 100 - data[ticker].highsLows.high },
+                            { name: '52 Week High', value: (data as Data)[ticker]?.highsLows.high },
+                            { name: '100%', value: 100 - (data as Data)[ticker]?.highsLows.high },
                           ]}
                         />
                         <PieChart
                           isOnlyValue
                           data={[
-                            { name: '52 Week Low', value: data[ticker].highsLows.low },
-                            { name: '100%', value: 100 - data[ticker].highsLows.low },
+                            { name: '52 Week Low', value: (data as Data)[ticker]?.highsLows.low },
+                            { name: '100%', value: 100 - (data as Data)[ticker]?.highsLows.low },
                           ]}
                         />
                       </CardContent>
@@ -551,7 +560,7 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent>
                         <LineChart
-                          data={data[ticker].periodicalReturn}
+                          data={(data as Data)[ticker]?.periodicalReturn}
                           Key1={'totalReturn'}
                           Key2={'ADIB Stock'}
                           Key3={'Return on Reinvested Dividends'}
@@ -564,26 +573,32 @@ export default function Dashboard() {
               <TabsContent value="financials">
                 <div className="py-8 px-4 grid grid-cols-1 md:grid-cols-2 gap-16">
                   <div>
-                    <Financials title="Valuation" data={data[ticker].financials.valuation} />
+                    <Financials
+                      title="Valuation"
+                      data={(data as Data)[ticker]?.financials.valuation}
+                    />
                     <Financials
                       title="Balance Sheet"
-                      data={data[ticker].financials['balance sheet']}
+                      data={(data as Data)[ticker]?.financials['balance sheet']}
                     />
                     <Financials
                       title="Operating Metrics"
-                      data={data[ticker].financials['operating metrics']}
+                      data={(data as Data)[ticker]?.financials['operating metrics']}
                     />
                   </div>
                   <div>
                     <Financials
                       title="Price History"
-                      data={data[ticker].financials['price history']}
+                      data={(data as Data)[ticker]?.financials['price history']}
                     />
-                    <Financials title="Dividends" data={data[ticker].financials.dividends} />
-                    <Financials title="Margins" data={data[ticker].financials.margins} />
+                    <Financials
+                      title="Dividends"
+                      data={(data as Data)[ticker]?.financials.dividends}
+                    />
+                    <Financials title="Margins" data={(data as Data)[ticker]?.financials.margins} />
                     <Financials
                       title="Income Statement"
-                      data={data[ticker].financials['income statement']}
+                      data={(data as Data)[ticker]?.financials['income statement']}
                     />
                   </div>
                 </div>
@@ -591,7 +606,7 @@ export default function Dashboard() {
               <TabsContent value="profile">
                 <div className="py-8 px-4 flex flex-col space-y-4">
                   <h2 className="text-lg font-semibold mb-4">Description</h2>
-                  <p>{data[ticker].overview.description}</p>
+                  <p>{(data as Data)[ticker]?.overview.description}</p>
                 </div>
               </TabsContent>
               <TabsContent value="assistant">

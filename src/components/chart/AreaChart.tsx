@@ -3,6 +3,7 @@ import React from 'react'
 
 import { Area, AreaChart as AreaRechart, ResponsiveContainer } from 'recharts'
 import { AreaChartProps } from '@/app/types'
+import { DataKey } from 'recharts/types/util/types'
 
 const AreaChart = ({
   width = '100%',
@@ -17,7 +18,7 @@ const AreaChart = ({
     <ResponsiveContainer width={width} height={height}>
       <AreaRechart data={data}>
         <defs>
-          {colors?.map((color, index) => (
+          {colors?.map((color: string | undefined, index: any) => (
             <linearGradient
               key={`color-${index}`}
               id={`color-${index}`}
@@ -32,11 +33,13 @@ const AreaChart = ({
           ))}
         </defs>
         {children}
-        {dataKeys.map((dkey, index) => (
+        {dataKeys.map((dkey: DataKey<any>, index: React.Key | null | undefined) => (
           <Area
             key={index}
+            // @ts-ignore
             stackId={stack ? 1 : index}
             dataKey={dkey}
+            // @ts-ignore
             stroke={colors ? colors[index] : 'black'}
             strokeWidth={2}
             fillOpacity={1}

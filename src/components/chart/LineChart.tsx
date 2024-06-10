@@ -11,7 +11,17 @@ import {
   Area,
 } from 'recharts'
 
-const LineChartComponent = ({ data, Key1, Key2, Key3 }) => (
+const LineChartComponent = ({
+  data,
+  Key1,
+  Key2,
+  Key3,
+}: {
+  data: any
+  Key1: any
+  Key2: any
+  Key3: any
+}) => (
   <ResponsiveContainer width="100%" height={300}>
     <AreaChart
       height={300}
