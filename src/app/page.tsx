@@ -66,6 +66,7 @@ import data from '@/lib/mock.json'
 import Image from 'next/image'
 import html2canvas from 'html2canvas'
 import HorizontalBarChart from '@/components/chart/HorizontalBarChart'
+import { useReactToPrint } from 'react-to-print'
 
 export default function Dashboard() {
   const [open, setOpen] = useState(false)
@@ -76,6 +77,11 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true)
   const printRef = useRef()
   const [isHorizontalBarChart, setIsHorizontalBarChart] = useState(true)
+  const contentToPrint = useRef(null)
+  const handlePrint = useReactToPrint({
+    documentTitle: 'Print This Document',
+    removeAfterPrint: true,
+  })
 
   const handleDownloadImage = async () => {
     const element = printRef.current
@@ -135,9 +141,27 @@ export default function Dashboard() {
     }, 1000)
   }, [])
 
+  const handleSearchClick = () => {
+    setOpen((open) => !open)
+  }
+
+  const Financials = ({ title, data }: { title: string; data: any }) => (
+    <div className="mb-8">
+      <h2 className="text-lg font-semibold mb-4">{title}</h2>
+      <ul>
+        {Object.entries(data).map(([key, value]) => (
+          <li key={key} className="flex justify-between py-1">
+            <span className="text-muted-foreground">{key}</span>
+            <span className="font-medium">{value ?? 'N/A'}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+
   return (
     <div className="flex min-h-screen w-full flex-col">
-      <Navigation />
+      <Navigation onSearchClick={handleSearchClick} />
       {loading ? (
         <div className="absolute inset-0 z-10 flex h-full w-full items-center justify-center gap-2 text-sm text-muted-foreground">
           <div className="h-4 w-4">
@@ -159,7 +183,7 @@ export default function Dashboard() {
           Loading...
         </div>
       ) : (
-        <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
+        <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8" ref={contentToPrint}>
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
@@ -183,7 +207,7 @@ export default function Dashboard() {
             <div className="relative w-24 h-24 mr-4">
               <Image
                 src={data[ticker].overview.logo || adiblogo}
-                alt="Abu Dhabi Islamic Bank Logo"
+                alt="Logo"
                 layout="fill"
                 objectFit="contain"
                 className="rounded-full"
@@ -196,15 +220,24 @@ export default function Dashboard() {
                   {data[ticker].overview.symbolOnADX} - Abu Dhabi Securities Exchange
                 </Button>
                 <div className="text-foreground text-base font-medium">
-                  10.90 AED<span className="text-green-600 text-sm ml-1">(+0.93%)</span>
+                  {data[ticker].overview.price} AED
+                  <span className="text-green-600 text-sm ml-1">(+0.93%)</span>
                 </div>
               </div>
             </div>
-            <Button variant="outline" className="ml-auto mr-4">
+            <Button
+              variant="outline"
+              className="ml-auto mr-4"
+              onClick={() => window.location.reload()}
+            >
               <RefreshCcw className="h-4 w-4 mr-2" />
               Refresh
             </Button>
-            <Button variant="outline" className="ml-auto">
+            <Button
+              variant="outline"
+              className="ml-auto"
+              onClick={() => handlePrint(null, () => contentToPrint.current)}
+            >
               <Printer className="h-4 w-4 mr-2" />
               Print Overview
             </Button>
@@ -214,12 +247,13 @@ export default function Dashboard() {
               <TabsList>
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="financials">Financials</TabsTrigger>
-                <TabsTrigger value="ptofile">Profile</TabsTrigger>
+                <TabsTrigger value="profile">Profile</TabsTrigger>
+                <TabsTrigger value="assistant">AI Assistant</TabsTrigger>
                 <TabsTrigger value="technicals">Technicals</TabsTrigger>
               </TabsList>
               <TabsContent value="overview">
                 <div className="pt-8 space-y-12">
-                  <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+                  <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:gap-8 lg:grid-cols-4">
                     <Card x-chunk="dashboard-01-chunk-2">
                       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-base font-medium">Sector</CardTitle>
@@ -261,7 +295,7 @@ export default function Dashboard() {
                       </CardContent>
                     </Card>
                   </div>
-                  <section className="flex justify-between space-x-8">
+                  <section className="flex flex-col space-y-8 lg:flex-row justify-between lg:space-x-8 lg:space-y-0">
                     <Card ref={printRef} x-chunk="dashboard-01-chunk-3" className="w-full">
                       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-base font-medium">Key Shareholders</CardTitle>
@@ -300,7 +334,7 @@ export default function Dashboard() {
                   </section>
                   <section className="space-y-6">
                     <h3 className="text-xl font-semibold">Key Statistics</h3>
-                    <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:gap-8 lg:grid-cols-4">
                       <Card>
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                           <CardTitle className="font-medium text-base">P/E Ratio:</CardTitle>
@@ -388,7 +422,7 @@ export default function Dashboard() {
                   </section>
                   <section className="space-y-6">
                     <h3 className="text-xl font-semibold">Growth</h3>
-                    <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:gap-8 lg:grid-cols-4">
                       <Card>
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                           <CardTitle className="font-medium text-base">
@@ -469,7 +503,7 @@ export default function Dashboard() {
                       </Card>
                     </div>
                   </section>
-                  <section className="flex justify-between space-x-8">
+                  <section className="flex flex-col space-y-8 lg:flex-row justify-between lg:space-x-8 lg:space-y-0">
                     <Card x-chunk="dashboard-01-chunk-3" className="w-full">
                       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-base font-medium">Dividents</CardTitle>
@@ -527,9 +561,52 @@ export default function Dashboard() {
                   </section>
                 </div>
               </TabsContent>
-              <TabsContent value="financials">Change your password here.</TabsContent>
-              <TabsContent value="ptofile">Change your password here.</TabsContent>
-              <TabsContent value="technicals">Change your password here.</TabsContent>
+              <TabsContent value="financials">
+                <div className="py-8 px-4 grid grid-cols-1 md:grid-cols-2 gap-16">
+                  <div>
+                    <Financials title="Valuation" data={data[ticker].financials.valuation} />
+                    <Financials
+                      title="Balance Sheet"
+                      data={data[ticker].financials['balance sheet']}
+                    />
+                    <Financials
+                      title="Operating Metrics"
+                      data={data[ticker].financials['operating metrics']}
+                    />
+                  </div>
+                  <div>
+                    <Financials
+                      title="Price History"
+                      data={data[ticker].financials['price history']}
+                    />
+                    <Financials title="Dividends" data={data[ticker].financials.dividends} />
+                    <Financials title="Margins" data={data[ticker].financials.margins} />
+                    <Financials
+                      title="Income Statement"
+                      data={data[ticker].financials['income statement']}
+                    />
+                  </div>
+                </div>
+              </TabsContent>
+              <TabsContent value="profile">
+                <div className="py-8 px-4 flex flex-col space-y-4">
+                  <h2 className="text-lg font-semibold mb-4">Description</h2>
+                  <p>{data[ticker].overview.description}</p>
+                </div>
+              </TabsContent>
+              <TabsContent value="assistant">
+                <div className="py-8 px-4 flex flex-col w-[400px] border rounded-xl">
+                  <iframe
+                    src="https://www.chatbase.co/chatbot-iframe/H_5EHNRxgS9WFvxnVg2QJ"
+                    width="100%"
+                    className="h-full min-h-[500px]"
+                    frameBorder="0"
+                  ></iframe>
+                </div>
+              </TabsContent>
+              <TabsContent value="technicals">
+                <div className="py-8 px-4 flex flex-col">TBD</div>
+              </TabsContent>
             </Tabs>
             <CommandDialog open={open} onOpenChange={setOpen}>
               <CommandInput placeholder="Type a command or search..." />
@@ -540,19 +617,40 @@ export default function Dashboard() {
                     onSelect={() => runCommand(() => handleSelect('FAB'))}
                     className="cursor-pointer"
                   >
-                    FAB
+                    <Image
+                      src={data.FAB.overview.logo || adiblogo}
+                      alt="Logo"
+                      width={24}
+                      height={24}
+                      className="rounded-full mr-2"
+                    />
+                    <span className="font-medium">FAB</span>
                   </CommandItem>
                   <CommandItem
                     onSelect={() => runCommand(() => handleSelect('ADIB'))}
                     className="cursor-pointer"
                   >
-                    ADIB
+                    <Image
+                      src={data.ADIB.overview.logo || adiblogo}
+                      alt="Logo"
+                      width={24}
+                      height={24}
+                      className="rounded-full mr-2"
+                    />
+                    <span className="font-medium">ADIB</span>
                   </CommandItem>
                   <CommandItem
                     onSelect={() => runCommand(() => handleSelect('ADNOCDIST'))}
                     className="cursor-pointer"
                   >
-                    ADNOCDIST
+                    <Image
+                      src={data?.ADNOCDIST?.overview?.logo || adiblogo}
+                      alt="Logo"
+                      width={24}
+                      height={24}
+                      className="rounded-full mr-2"
+                    />
+                    <span className="font-medium">ADNOCDIST</span>
                   </CommandItem>
                 </CommandGroup>
               </CommandList>

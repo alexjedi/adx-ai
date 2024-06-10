@@ -30,8 +30,18 @@ import Image from 'next/image'
 import logo from '@/app/apple-touch-icon.png'
 import { usePathname } from 'next/navigation'
 
-const Navigation: React.FC = () => {
+type NavigationProps = {
+  onSearchClick?: () => void
+}
+
+const Navigation: React.FC<NavigationProps> = ({ onSearchClick }) => {
   const pathname = usePathname()
+
+  const handleSearchClick = () => {
+    if (onSearchClick) {
+      onSearchClick()
+    }
+  }
 
   return (
     <header className="sticky top-0 flex h-20 items-center gap-4 bg-background px-4 md:px-8 z-10">
@@ -48,7 +58,11 @@ const Navigation: React.FC = () => {
               Dashboard
             </Link>
           </Button>
-          <Button variant="ghost" className="rounded-full text-[15px] font-medium" asChild>
+          <Button
+            variant="ghost"
+            className="rounded-full text-[15px] font-medium pointer-events-none"
+            asChild
+          >
             <Link
               href="/sandbox"
               className={`${
@@ -58,7 +72,11 @@ const Navigation: React.FC = () => {
               Sandbox
             </Link>
           </Button>
-          <Button variant="ghost" className="rounded-full text-[15px] font-medium" asChild>
+          <Button
+            variant="ghost"
+            className="rounded-full text-[15px] font-medium pointer-events-none"
+            asChild
+          >
             <Link
               href="/preview"
               className={`${
@@ -103,7 +121,10 @@ const Navigation: React.FC = () => {
       <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-2">
         <form className="ml-auto flex-1 sm:flex-initial">
           <div className="relative">
-            <div className="flex space-x-2 bg-secondary px-4 py-2 items-center rounded-full border border-transparent cursor-pointer hover:border-foreground transition duration-300 ease-in-out">
+            <div
+              onClick={handleSearchClick}
+              className="flex space-x-2 bg-secondary px-4 py-2 items-center rounded-full border border-transparent cursor-pointer hover:border-foreground transition duration-300 ease-in-out"
+            >
               <Search className="h-4 w-4 text-muted-foreground" />
               <span className="text-sm text-muted-foreground font-medium">Enter ADX ticker</span>
               <p className="text-sm text-muted-foreground">
