@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 'use client'
 
 import Link from 'next/link'
@@ -68,11 +70,15 @@ import html2canvas from 'html2canvas'
 import HorizontalBarChart from '@/components/chart/HorizontalBarChart'
 import { useReactToPrint } from 'react-to-print'
 import { Data } from '@/lib/types'
+import { DataFinancials } from '@/lib/types'
+import empty from '@/lib/mockEmpty.json'
 
 export default function Dashboard() {
   const [open, setOpen] = useState(false)
-  const [extractedFinancials, setExtractedFinancials] = useState('')
-  const [extractedOverview, setExtractedOverview] = useState('')
+  const [extractedFinancials, setExtractedFinancials] = useState<DataFinancials>(
+    empty['TICKER'].financials
+  )
+  const [extractedOverview, setExtractedOverview] = useState(empty['TICKER'])
   const [ticker, setTicker] = useState('ADIB')
   const [url, setURL] = useState('')
   const [loading, setLoading] = useState(true)
@@ -122,14 +128,13 @@ export default function Dashboard() {
   const handleSelect = async (ticker: string) => {
     if (loading || ticker === '') return
     setLoading(true)
-    setTimeout(async () => {
-      setTicker(ticker)
-      // const extractedFinance = await scrapePageFinancials(newTicker);
-      // const extractedOver = await scrapePageOverview(newTicker);
-      // setExtractedFinancials(extractedFinance);
-      // setExtractedOverview(extractedOver);
-      setLoading(false)
-    }, 2000)
+    setTicker(ticker)
+    const extractedFinance = await scrapePageFinancials(ticker)
+    const extractedOver = await scrapePageOverview(ticker)
+    setExtractedFinancials(extractedFinance)
+    setExtractedOverview(extractedOver)
+    console.log(extractedOverview)
+    setLoading(false)
   }
 
   const runCommand = useCallback((command: () => unknown) => {
@@ -138,9 +143,17 @@ export default function Dashboard() {
   }, [])
 
   useEffect(() => {
-    setTimeout(() => {
+    const fetchData = async () => {
+      setLoading(true)
+      setTicker('ADIB')
+      const extractedFinance = await scrapePageFinancials(ticker)
+      const extractedOver = await scrapePageOverview(ticker)
+      setExtractedFinancials(extractedFinance)
+      setExtractedOverview(extractedOver)
+      console.log(extractedOverview)
       setLoading(false)
-    }, 1000)
+    }
+    fetchData()
   }, [])
 
   const handleSearchClick = () => {
@@ -162,7 +175,7 @@ export default function Dashboard() {
   )
 
   return (
-    <div className="flex min-h-screen w-full flex-col">
+    <div className="flex min-h-screen w-full flex-col overflow-hidden">
       <Navigation onSearchClick={handleSearchClick} />
       {loading ? (
         <div className="absolute inset-0 z-10 flex h-full w-full items-center justify-center gap-2 text-sm text-muted-foreground">
@@ -196,7 +209,9 @@ export default function Dashboard() {
               </BreadcrumbSeparator>
               <BreadcrumbItem>
                 <BreadcrumbLink href="/components">
-                  {(data as Data)[ticker]?.overview?.sector}
+                  {extractedOverview.overview.sector
+                    ? extractedOverview.overview.sector
+                    : (data as unknown as Data)[ticker]?.overview.sector}
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator>
@@ -207,10 +222,12 @@ export default function Dashboard() {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <section className="flex items-start py-2">
+          <section className="flex flex-col md:flex-row items-start py-2">
             <div className="relative w-24 h-24 mr-4">
               <Image
-                src={(data as Data)[ticker]?.overview.logo || adiblogo}
+                src={`https://s3-symbol-logo.tradingview.com/${
+                  (data as unknown as Data)[ticker]?.overview.url
+                }--big.svg`}
                 alt="Logo"
                 layout="fill"
                 objectFit="contain"
@@ -219,19 +236,29 @@ export default function Dashboard() {
             </div>
             <div className="flex flex-col flex-grow">
               <div className="flex flex-col items-start space-y-4">
-                <h1 className="text-3xl font-semibold">{(data as Data)[ticker]?.overview.name}</h1>
+                <h1 className="text-xl md:text-3xl font-semibold">
+                  {(data as unknown as Data)[ticker]?.overview.name}
+                </h1>
                 <Button variant="outline" className="px-4 font-medium">
-                  {(data as Data)[ticker]?.overview.symbolOnADX} - Abu Dhabi Securities Exchange
+                  {(data as unknown as Data)[ticker]?.overview.symbolOnADX} - Abu Dhabi Securities
+                  Exchange
                 </Button>
                 <div className="text-foreground text-base font-medium">
-                  {(data as Data)[ticker]?.overview.price} AED
-                  <span className="text-green-600 text-sm ml-1">(+0.93%)</span>
+                  {extractedOverview.overview.price
+                    ? extractedOverview.overview.price.slice(0, 5)
+                    : (data as unknown as Data)[ticker]?.overview.price}{' '}
+                  AED
+                  <span className="text-green-600 text-sm md:ml-1">
+                    {extractedOverview.overview.price
+                      ? extractedOverview.overview.price.slice(9)
+                      : ''}
+                  </span>
                 </div>
               </div>
             </div>
             <Button
               variant="outline"
-              className="ml-auto mr-4"
+              className="md:ml-auto mr-4"
               onClick={() => window.location.reload()}
             >
               <RefreshCcw className="h-4 w-4 mr-2" />
@@ -239,7 +266,7 @@ export default function Dashboard() {
             </Button>
             <Button
               variant="outline"
-              className="ml-auto"
+              className="md:ml-auto"
               onClick={() => handlePrint(null, () => contentToPrint.current)}
             >
               <Printer className="h-4 w-4 mr-2" />
@@ -265,7 +292,9 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-xl font-medium">
-                          {(data as Data)[ticker]?.overview.sector}
+                          {extractedOverview.overview.sector
+                            ? extractedOverview.overview.sector
+                            : (data as unknown as Data)[ticker]?.overview.sector}
                         </div>
                       </CardContent>
                     </Card>
@@ -276,7 +305,9 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-xl font-medium">
-                          {(data as Data)[ticker]?.overview.incorporation}
+                          {extractedOverview.overview.incorporation
+                            ? extractedOverview.overview.incorporation
+                            : (data as unknown as Data)[ticker]?.overview.incorporation}
                         </div>
                       </CardContent>
                     </Card>
@@ -287,7 +318,9 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-xl font-medium">
-                          {(data as Data)[ticker]?.overview.listing}
+                          {extractedOverview.overview.listing
+                            ? extractedOverview.overview.listing
+                            : (data as unknown as Data)[ticker]?.overview.listing}
                         </div>
                       </CardContent>
                     </Card>
@@ -298,7 +331,11 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-xl font-medium">
-                          {formatPropertyValue((data as Data)[ticker]?.overview.sharecapital)}
+                          {formatPropertyValue(
+                            extractedOverview.overview.sharecapital
+                              ? extractedOverview.overview.sharecapital
+                              : (data as unknown as Data)[ticker]?.overview.sharecapital
+                          )}
                         </div>
                       </CardContent>
                     </Card>
@@ -313,7 +350,7 @@ export default function Dashboard() {
                         </Button>
                       </CardHeader>
                       <CardContent className="w-full">
-                        <PieChart data={(data as Data)[ticker]?.keyShareholders} />
+                        <PieChart data={(data as unknown as Data)[ticker]?.keyShareholders} />
                       </CardContent>
                     </Card>
                     <Card x-chunk="dashboard-01-chunk-3" className="w-full">
@@ -329,12 +366,22 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent className="w-full">
                         {isHorizontalBarChart ? (
-                          <PieChart data={(data as Data)[ticker]?.stockOwnership} />
+                          <PieChart
+                            data={
+                              extractedOverview.stockOwnership
+                                ? extractedOverview.stockOwnership
+                                : (data as unknown as Data)[ticker]?.stockOwnership
+                            }
+                          />
                         ) : (
                           <HorizontalBarChart
                             xKey="name"
                             yKey="value"
-                            data={(data as Data)[ticker]?.stockOwnership}
+                            data={
+                              extractedOverview.stockOwnership
+                                ? extractedOverview.stockOwnership
+                                : (data as unknown as Data)[ticker]?.stockOwnership
+                            }
                           />
                         )}
                       </CardContent>
@@ -350,7 +397,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {(data as Data)[ticker]?.keyStatistics.peRatio}
+                            {(data as unknown as Data)[ticker]?.keyStatistics.peRatio}
                           </div>
                         </CardContent>
                       </Card>
@@ -361,7 +408,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {(data as Data)[ticker]?.keyStatistics.priceToSales}
+                            {(data as unknown as Data)[ticker]?.keyStatistics.priceToSales}
                           </div>
                         </CardContent>
                       </Card>
@@ -372,7 +419,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {(data as Data)[ticker]?.keyStatistics.priceToBook}
+                            {(data as unknown as Data)[ticker]?.keyStatistics.priceToBook}
                           </div>
                         </CardContent>
                       </Card>
@@ -385,7 +432,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {(data as Data)[ticker]?.keyStatistics.priceToCashFlow}
+                            {(data as unknown as Data)[ticker]?.keyStatistics.priceToCashFlow}
                           </div>
                         </CardContent>
                       </Card>
@@ -398,7 +445,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {(data as Data)[ticker]?.keyStatistics.debtToEquity}
+                            {(data as unknown as Data)[ticker]?.keyStatistics.debtToEquity}
                           </div>
                         </CardContent>
                       </Card>
@@ -411,7 +458,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {(data as Data)[ticker]?.keyStatistics.longTermDebtToEquity}
+                            {(data as unknown as Data)[ticker]?.keyStatistics.longTermDebtToEquity}
                           </div>
                         </CardContent>
                       </Card>
@@ -422,7 +469,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {(data as Data)[ticker]?.keyStatistics.returnOnEquity}
+                            {(data as unknown as Data)[ticker]?.keyStatistics.returnOnEquity}
                           </div>
                         </CardContent>
                       </Card>
@@ -440,7 +487,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {(data as Data)[ticker]?.growth.revenueGrowthYoY}
+                            {(data as unknown as Data)[ticker]?.growth.revenueGrowthYoY}
                           </div>
                         </CardContent>
                       </Card>
@@ -453,7 +500,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {(data as Data)[ticker]?.growth.revenueGrowth5Y}
+                            {(data as unknown as Data)[ticker]?.growth.revenueGrowth5Y}
                           </div>
                         </CardContent>
                       </Card>
@@ -466,7 +513,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {(data as Data)[ticker]?.growth.epsGrowthYoY}
+                            {(data as unknown as Data)[ticker]?.growth.epsGrowthYoY}
                           </div>
                         </CardContent>
                       </Card>
@@ -479,7 +526,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {(data as Data)[ticker]?.growth.epsGrowthTTM}
+                            {(data as unknown as Data)[ticker]?.growth.epsGrowthTTM}
                           </div>
                         </CardContent>
                       </Card>
@@ -492,7 +539,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {(data as Data)[ticker]?.growth.epsGrowth5Y}
+                            {(data as unknown as Data)[ticker]?.growth.epsGrowth5Y}
                           </div>
                         </CardContent>
                       </Card>
@@ -505,7 +552,7 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {(data as Data)[ticker]?.growth.epsGrowth3Y}
+                            {(data as unknown as Data)[ticker]?.growth.epsGrowth3Y}
                           </div>
                         </CardContent>
                       </Card>
@@ -519,7 +566,7 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent className="w-full">
                         <BarChart
-                          data={(data as Data)[ticker]?.dividends}
+                          data={(data as unknown as Data)[ticker]?.dividends}
                           xKey="year"
                           yKey="dividend"
                           y2Key="yield"
@@ -535,15 +582,35 @@ export default function Dashboard() {
                         <PieChart
                           isOnlyValue
                           data={[
-                            { name: '52 Week High', value: (data as Data)[ticker]?.highsLows.high },
-                            { name: '100%', value: 100 - (data as Data)[ticker]?.highsLows.high },
+                            {
+                              name: '52 Week High',
+                              value: extractedFinancials
+                                ? Number(extractedFinancials['price history']['52 Week High'])
+                                : (data as unknown as Data)[ticker]?.highsLows.high,
+                            },
+                            {
+                              name: '100%',
+                              value: extractedFinancials
+                                ? 100 - Number(extractedFinancials['price history']['52 Week High'])
+                                : 100 - (data as unknown as Data)[ticker]?.highsLows.high,
+                            },
                           ]}
                         />
                         <PieChart
                           isOnlyValue
                           data={[
-                            { name: '52 Week Low', value: (data as Data)[ticker]?.highsLows.low },
-                            { name: '100%', value: 100 - (data as Data)[ticker]?.highsLows.low },
+                            {
+                              name: '52 Week Low',
+                              value: extractedFinancials
+                                ? Number(extractedFinancials['price history']['52 Week Low'])
+                                : (data as unknown as Data)[ticker]?.highsLows.low,
+                            },
+                            {
+                              name: '100%',
+                              value: extractedFinancials
+                                ? 100 - Number(extractedFinancials['price history']['52 Week Low'])
+                                : 100 - (data as unknown as Data)[ticker]?.highsLows.low,
+                            },
                           ]}
                         />
                       </CardContent>
@@ -559,7 +626,7 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent>
                         <LineChart
-                          data={(data as Data)[ticker]?.periodicalReturn}
+                          data={(data as unknown as Data)[ticker]?.periodicalReturn}
                           Key1={'totalReturn'}
                           Key2={'ADIB Stock'}
                           Key3={'Return on Reinvested Dividends'}
@@ -574,30 +641,61 @@ export default function Dashboard() {
                   <div>
                     <Financials
                       title="Valuation"
-                      data={(data as Data)[ticker]?.financials.valuation}
+                      data={
+                        extractedFinancials
+                          ? extractedFinancials?.valuation
+                          : (data as unknown as Data)[ticker]?.financials.valuation
+                      }
                     />
                     <Financials
                       title="Balance Sheet"
-                      data={(data as Data)[ticker]?.financials['balance sheet']}
+                      data={
+                        extractedFinancials['balance sheet']['Current Ratio (MRQ)']
+                          ? extractedFinancials['balance sheet']
+                          : (data as unknown as Data)[ticker]?.financials['balance sheet']
+                      }
                     />
                     <Financials
                       title="Operating Metrics"
-                      data={(data as Data)[ticker]?.financials['operating metrics']}
+                      data={
+                        extractedFinancials
+                          ? extractedFinancials['operating metrics']
+                          : (data as unknown as Data)[ticker]?.financials['operating metrics']
+                      }
                     />
                   </div>
                   <div>
                     <Financials
                       title="Price History"
-                      data={(data as Data)[ticker]?.financials['price history']}
+                      data={
+                        extractedFinancials
+                          ? extractedFinancials['price history']
+                          : (data as unknown as Data)[ticker]?.financials['price history']
+                      }
                     />
                     <Financials
                       title="Dividends"
-                      data={(data as Data)[ticker]?.financials.dividends}
+                      data={
+                        extractedFinancials
+                          ? extractedFinancials?.dividends
+                          : (data as unknown as Data)[ticker]?.financials.dividends
+                      }
                     />
-                    <Financials title="Margins" data={(data as Data)[ticker]?.financials.margins} />
+                    <Financials
+                      title="Margins"
+                      data={
+                        extractedFinancials
+                          ? extractedFinancials?.valuation
+                          : (data as unknown as Data)[ticker]?.financials.margins
+                      }
+                    />
                     <Financials
                       title="Income Statement"
-                      data={(data as Data)[ticker]?.financials['income statement']}
+                      data={
+                        extractedFinancials
+                          ? extractedFinancials['income statement']
+                          : (data as unknown as Data)[ticker]?.financials['income statement']
+                      }
                     />
                   </div>
                 </div>
@@ -605,7 +703,11 @@ export default function Dashboard() {
               <TabsContent value="profile">
                 <div className="py-8 px-4 flex flex-col space-y-4">
                   <h2 className="text-lg font-semibold mb-4">Description</h2>
-                  <p>{(data as Data)[ticker]?.overview.description}</p>
+                  <p>
+                    {extractedOverview.overview.description
+                      ? extractedOverview.overview.description
+                      : (data as unknown as Data)[ticker]?.overview.description}
+                  </p>
                 </div>
               </TabsContent>
               <TabsContent value="assistant">
@@ -632,7 +734,9 @@ export default function Dashboard() {
                     className="cursor-pointer"
                   >
                     <Image
-                      src={data.FAB.overview.logo || adiblogo}
+                      src={`https://s3-symbol-logo.tradingview.com/${
+                        (data as unknown as Data)['FAB']?.overview.url
+                      }--big.svg`}
                       alt="Logo"
                       width={24}
                       height={24}
@@ -645,7 +749,9 @@ export default function Dashboard() {
                     className="cursor-pointer"
                   >
                     <Image
-                      src={data.ADIB.overview.logo || adiblogo}
+                      src={`https://s3-symbol-logo.tradingview.com/${
+                        (data as unknown as Data)['ADIB']?.overview.url
+                      }--big.svg`}
                       alt="Logo"
                       width={24}
                       height={24}
@@ -658,13 +764,30 @@ export default function Dashboard() {
                     className="cursor-pointer"
                   >
                     <Image
-                      src={data?.ADNOCDIST?.overview?.logo || adiblogo}
+                      src={`https://s3-symbol-logo.tradingview.com/${
+                        (data as unknown as Data)['ADNOCDIST']?.overview.url
+                      }--big.svg`}
                       alt="Logo"
                       width={24}
                       height={24}
                       className="rounded-full mr-2"
                     />
                     <span className="font-medium">ADNOCDIST</span>
+                  </CommandItem>
+                  <CommandItem
+                    onSelect={() => runCommand(() => handleSelect('ALDAR'))}
+                    className="cursor-pointer"
+                  >
+                    <Image
+                      src={`https://s3-symbol-logo.tradingview.com/${
+                        (data as unknown as Data)['ALDAR']?.overview.url
+                      }--big.svg`}
+                      alt="Logo"
+                      width={24}
+                      height={24}
+                      className="rounded-full mr-2"
+                    />
+                    <span className="font-medium">ALDAR</span>
                   </CommandItem>
                 </CommandGroup>
               </CommandList>

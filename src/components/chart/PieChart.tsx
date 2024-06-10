@@ -29,7 +29,7 @@ const PieChartComponent = ({
             fill={isOnlyValue ? (index > 0 ? '#f5f3ff' : COLORS[index]) : COLORS[index]}
           />
         ))}
-        {isOnlyValue && <Label value={`${data[0].value}%`} position="center" />}
+        {isOnlyValue && <Label value={`${data[0].value}`} position="center" />}
       </Pie>
       <Tooltip content={TooltipCustom} />
       <Legend

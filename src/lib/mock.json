@@ -2,7 +2,7 @@
   "ADIB": {
     "overview": {
       "name": "Abu Dhabi Islamic Bank",
-      "logo": "https://s3-symbol-logo.tradingview.com/abu-dhabi-islamic-bank--big.svg",
+      "url": "abu-dhabi-islamic-bank",
       "symbolOnADX": "ADIB",
       "sector": "Financials",
       "incorporation": "31-Dec-96",
@@ -131,258 +131,387 @@
   "FAB": {
     "overview": {
       "name": "First Abu Dhabi Bank",
-      "logo": "https://s3-symbol-logo.tradingview.com/first-abu-dhabi-bank--big.svg",
+      "url": "first-abu-dhabi-bank",
       "symbolOnADX": "FAB",
       "sector": "Financials",
-      "incorporation": "31-Dec-96",
-      "listing": "14-Nov-00",
-      "sharecapital": "3,632,000,000.00",
-      "price": "12.18",
-      "description": "Abu Dhabi Islamic Bank engages in the provision of Shariah-based banking, financing, and investment services. It operates through the following segments: Global Retail Banking, Global Wholesale Banking, Private Banking, Treasury, Real Estate, and Other Operations. The Global Retail Banking segment handles small and medium businesses and deposits of individual customers, and provides consumer and commercial murabahat, Ijara, Islamic covered card, funds transfer, and trade finance facilities. The Global Wholesale Banking segment covers financing, other credit facilities, deposits, and current accounts for corporate and institutional customers. The Private Banking segment includes financing, other credit facilities, deposits, and current accounts for high net worth individual customers. The Treasury segment consists of money market, trading and treasury services, and management funding operations of the bank by use of investment deposits. The Real Estate segment acquires sells, develops, and leases both land and buildings, management and resale of properties, and all associated activities. The Other Operations segment focuses on head office and unallocated costs. The company was founded on January 1, 1997 and is headquartered in Abu Dhabi, United Arab Emirates."
+      "incorporation": "07-Apr-16",
+      "listing": "01-Apr-17",
+      "price": "15.40",
+      "sharecapital": "10,900,000,000.00",
+      "description": "First Abu Dhabi Bank (FAB) is the largest bank in the United Arab Emirates. The bank offers financial products and services including corporate, investment, and personal banking. The corporate banking segment covers financing and other credit facilities, deposits, and current accounts for corporate and institutional customers. The investment banking segment includes treasury, money market, and trading activities. The personal banking segment includes retail loans and deposits, credit card facilities, and other consumer banking services. FAB was founded in 2016 following the merger of National Bank of Abu Dhabi and First Gulf Bank and is headquartered in Abu Dhabi, United Arab Emirates."
     },
     "keyShareholders": [
-      { "name": "Emirates International Investment Company LLC", "value": 53.65 },
-      { "name": "Emirates National Bank of Dubai PJSC", "value": 39.4 },
-      { "name": "Other investors", "value": 6.95 }
+      { "name": "Mubadala Investment Company", "value": 37.14 },
+      { "name": "Abu Dhabi Investment Council", "value": 33.3 },
+      { "name": "Other investors", "value": 29.56 }
     ],
     "stockOwnership": [
-      { "name": "Foreign Ownership", "value": 14.29 },
-      { "name": "GCC Nationals", "value": 3.77 },
-      { "name": "UAE Nationals", "value": 81.48 },
-      { "name": "Arab Countries", "value": 0.32 }
+      { "name": "Foreign Ownership", "value": 12.83 },
+      { "name": "GCC Nationals", "value": 5.1 },
+      { "name": "UAE Nationals", "value": 80.05 },
+      { "name": "Arab Countries", "value": 2.02 }
     ],
     "keyStatistics": {
-      "peRatio": 8.27,
-      "priceToSales": 3.77,
-      "priceToBook": 1.77,
-      "priceToCashFlow": 6.93,
-      "debtToEquity": 8.64,
-      "longTermDebtToEquity": 0.73,
-      "returnOnEquity": 3.05
+      "peRatio": 10.34,
+      "priceToSales": 4.25,
+      "priceToBook": 1.55,
+      "priceToCashFlow": 7.82,
+      "debtToEquity": 6.43,
+      "longTermDebtToEquity": 0.91,
+      "returnOnEquity": 8.57
     },
     "growth": {
-      "revenueGrowthYoY": 34.1,
-      "revenueGrowth5Y": 14.54,
-      "epsGrowthYoY": 30.86,
-      "epsGrowthTTM": 35.29,
-      "epsGrowth5Y": 15.03,
-      "epsGrowth3Y": 52.27
+      "revenueGrowthYoY": 28.7,
+      "revenueGrowth5Y": 11.89,
+      "epsGrowthYoY": 24.3,
+      "epsGrowthTTM": 27.46,
+      "epsGrowth5Y": 12.78,
+      "epsGrowth3Y": 34.22
     },
     "dividends": [
-      { "year": 2019, "dividend": 0.27, "yield": 5.08 },
-      { "year": 2020, "dividend": 0.21, "yield": 4.38 },
-      { "year": 2021, "dividend": 0.31, "yield": 4.53 },
-      { "year": 2022, "dividend": 0.49, "yield": 5.38 },
-      { "year": 2023, "dividend": 0.71, "yield": 7.06 }
+      { "year": 2019, "dividend": 0.5, "yield": 3.25 },
+      { "year": 2020, "dividend": 0.45, "yield": 3.12 },
+      { "year": 2021, "dividend": 0.55, "yield": 3.57 },
+      { "year": 2022, "dividend": 0.65, "yield": 4.22 },
+      { "year": 2023, "dividend": 0.75, "yield": 4.87 }
     ],
     "highsLows": {
-      "high": 12.18,
-      "low": 9.8
+      "high": 16.85,
+      "low": 13.2
     },
     "periodicalReturn": [
       {
         "name": "1 year",
-        "totalReturn": 13.28,
-        "ADIB Stock": 6.5,
-        "Return on Reinvested Dividends": 7.18
+        "totalReturn": 12.47,
+        "FAB Stock": 8.1,
+        "Return on Reinvested Dividends": 4.37
       },
       {
         "name": "3 years",
-        "totalReturn": 129.05,
-        "ADIB Stock": 97.17,
-        "Return on Reinvested Dividends": 31.89
+        "totalReturn": 95.63,
+        "FAB Stock": 62.45,
+        "Return on Reinvested Dividends": 33.18
       },
       {
         "name": "5 years",
-        "totalReturn": 224.31,
-        "ADIB Stock": 147.56,
-        "Return on Reinvested Dividends": 76.75
+        "totalReturn": 158.92,
+        "FAB Stock": 102.76,
+        "Return on Reinvested Dividends": 56.16
       }
     ],
     "financials": {
       "valuation": {
-        "Market Capitalization": "39.589B",
-        "Enterprise Value (MRQ)": "19.492B",
+        "Market Capitalization": "70.87B",
+        "Enterprise Value (MRQ)": "45.16B",
         "Enterprise Value/EBITDA (TTM)": null,
-        "Total Shares Outstanding": "3.632B",
+        "Total Shares Outstanding": "10.9B",
         "Number of Employees": null,
         "Number of Shareholders": null,
-        "Price to Earnings Ratio (TTM)": "7.9086",
-        "Price to Revenue Ratio (TTM)": "2.7492",
-        "Price to Book (FY)": "1.9252",
-        "Price to Sales (FY)": "2.9361"
+        "Price to Earnings Ratio (TTM)": "9.5672",
+        "Price to Revenue Ratio (TTM)": "3.7451",
+        "Price to Book (FY)": "1.6712",
+        "Price to Sales (FY)": "3.9754"
       },
       "balance sheet": {
-        "Quick Ratio (MRQ)": "0.3669",
-        "Current Ratio (MRQ)": "0.3669",
-        "Debt to Equity Ratio (MRQ)": "0.6023",
-        "Net Debt (MRQ)": "-21.335B",
-        "Total Debt (MRQ)": "11.117B",
-        "Total Assets (MRQ)": "194.647B"
+        "Quick Ratio (MRQ)": "0.5123",
+        "Current Ratio (MRQ)": "0.5123",
+        "Debt to Equity Ratio (MRQ)": "0.7431",
+        "Net Debt (MRQ)": "-14.758B",
+        "Total Debt (MRQ)": "24.934B",
+        "Total Assets (MRQ)": "289.76B"
       },
       "operating metrics": {
-        "Return on Assets (TTM)": "0.0270",
-        "Return on Equity (TTM)": "0.2825",
-        "Return on Invested Capital (TTM)": "0.2076",
+        "Return on Assets (TTM)": "0.0376",
+        "Return on Equity (TTM)": "0.3672",
+        "Return on Invested Capital (TTM)": "0.2653",
         "Revenue per Employee (FY)": null
       },
       "price history": {
-        "Average Volume (10 day)": "3.505M",
-        "1-Year Beta": "1.4602",
-        "52 Week High": "12.1800",
-        "52 Week Low": "9.8000"
+        "Average Volume (10 day)": "4.15M",
+        "1-Year Beta": "1.3178",
+        "52 Week High": "16.8500",
+        "52 Week Low": "13.2000"
       },
       "dividends": {
-        "Dividends Paid (FY)": "-1.871B",
-        "Dividend Yield Forward": "6.5561",
-        "Dividends per Share (FY)": "0.7146"
+        "Dividends Paid (FY)": "-3.123B",
+        "Dividend Yield Forward": "4.8705",
+        "Dividends per Share (FY)": "0.7500"
       },
       "margins": {
-        "Net Margin (TTM)": "34.76%",
+        "Net Margin (TTM)": "36.24%",
         "Gross Margin (TTM)": null,
-        "Operating Margin (TTM)": "41.09%",
-        "Pretax Margin (TTM)": "41.09%"
+        "Operating Margin (TTM)": "43.87%",
+        "Pretax Margin (TTM)": "43.87%"
       },
       "income statement": {
-        "Basic EPS (FY)": "1.2840",
-        "Basic EPS (TTM)": "1.3656",
-        "EPS Diluted (FY)": "1.2840",
-        "Net Income (FY)": "4.663B",
+        "Basic EPS (FY)": "2.4321",
+        "Basic EPS (TTM)": "2.5743",
+        "EPS Diluted (FY)": "2.4321",
+        "Net Income (FY)": "9.43B",
         "EBITDA (TTM)": null,
         "Gross Profit (MRQ)": null,
         "Gross Profit (FY)": null,
-        "Last Year Revenue (FY)": "13.36B",
-        "Total Revenue (FY)": "13.36B",
-        "Free Cash Flow (TTM)": "6.14B"
+        "Last Year Revenue (FY)": "24.63B",
+        "Total Revenue (FY)": "24.63B",
+        "Free Cash Flow (TTM)": "12.85B"
       }
     }
   },
   "ADNOCDIST": {
     "overview": {
-      "name": "First Abu Dhabi Bank",
-      "logo": "https://s3-symbol-logo.tradingview.com/first-abu-dhabi-bank--big.svg",
-      "symbolOnADX": "FAB",
-      "sector": "Financials",
-      "incorporation": "31-Dec-96",
-      "listing": "14-Nov-00",
-      "sharecapital": "3,632,000,000.00",
-      "price": "12.18",
-      "description": "Abu Dhabi Islamic Bank engages in the provision of Shariah-based banking, financing, and investment services. It operates through the following segments: Global Retail Banking, Global Wholesale Banking, Private Banking, Treasury, Real Estate, and Other Operations. The Global Retail Banking segment handles small and medium businesses and deposits of individual customers, and provides consumer and commercial murabahat, Ijara, Islamic covered card, funds transfer, and trade finance facilities. The Global Wholesale Banking segment covers financing, other credit facilities, deposits, and current accounts for corporate and institutional customers. The Private Banking segment includes financing, other credit facilities, deposits, and current accounts for high net worth individual customers. The Treasury segment consists of money market, trading and treasury services, and management funding operations of the bank by use of investment deposits. The Real Estate segment acquires sells, develops, and leases both land and buildings, management and resale of properties, and all associated activities. The Other Operations segment focuses on head office and unallocated costs. The company was founded on January 1, 1997 and is headquartered in Abu Dhabi, United Arab Emirates."
+      "name": "ADNOC Distribution",
+      "url": "adnoc-drilling-company-pjsc",
+      "symbolOnADX": "ADNOCDIST",
+      "sector": "Energy",
+      "incorporation": "01-Jan-73",
+      "listing": "13-Dec-17",
+      "price": "4.50",
+      "sharecapital": "12,500,000,000.00",
+      "description": "ADNOC Distribution engages in the marketing and distribution of petroleum products. It operates through the Retail and Corporate segments. The Retail segment sells petroleum products, natural gas, and ancillary products. The Corporate segment offers bulk fuel, aviation fuel, and lubricants. The company was founded on January 1, 1973, and is headquartered in Abu Dhabi, United Arab Emirates."
     },
     "keyShareholders": [
-      { "name": "Emirates International Investment Company LLC", "value": 53.65 },
-      { "name": "Emirates National Bank of Dubai PJSC", "value": 39.4 },
-      { "name": "Other investors", "value": 6.95 }
+      { "name": "Abu Dhabi National Oil Company (ADNOC)", "value": 80 },
+      { "name": "Institutional Investors", "value": 15 },
+      { "name": "Other investors", "value": 5 }
     ],
     "stockOwnership": [
-      { "name": "Foreign Ownership", "value": 14.29 },
-      { "name": "GCC Nationals", "value": 3.77 },
-      { "name": "UAE Nationals", "value": 81.48 },
-      { "name": "Arab Countries", "value": 0.32 }
+      { "name": "Foreign Ownership", "value": 20.5 },
+      { "name": "GCC Nationals", "value": 5.5 },
+      { "name": "UAE Nationals", "value": 70.5 },
+      { "name": "Arab Countries", "value": 3.5 }
     ],
     "keyStatistics": {
-      "peRatio": 8.27,
-      "priceToSales": 3.77,
-      "priceToBook": 1.77,
-      "priceToCashFlow": 6.93,
-      "debtToEquity": 8.64,
-      "longTermDebtToEquity": 0.73,
-      "returnOnEquity": 3.05
+      "peRatio": 12.5,
+      "priceToSales": 1.8,
+      "priceToBook": 3.4,
+      "priceToCashFlow": 9.6,
+      "debtToEquity": 0.4,
+      "longTermDebtToEquity": 0.2,
+      "returnOnEquity": 20.5
     },
     "growth": {
-      "revenueGrowthYoY": 34.1,
-      "revenueGrowth5Y": 14.54,
-      "epsGrowthYoY": 30.86,
-      "epsGrowthTTM": 35.29,
-      "epsGrowth5Y": 15.03,
-      "epsGrowth3Y": 52.27
+      "revenueGrowthYoY": 12.7,
+      "revenueGrowth5Y": 10.2,
+      "epsGrowthYoY": 15.6,
+      "epsGrowthTTM": 18.3,
+      "epsGrowth5Y": 11.4,
+      "epsGrowth3Y": 14.8
     },
     "dividends": [
-      { "year": 2019, "dividend": 0.27, "yield": 5.08 },
-      { "year": 2020, "dividend": 0.21, "yield": 4.38 },
-      { "year": 2021, "dividend": 0.31, "yield": 4.53 },
-      { "year": 2022, "dividend": 0.49, "yield": 5.38 },
-      { "year": 2023, "dividend": 0.71, "yield": 7.06 }
+      { "year": 2019, "dividend": 0.2, "yield": 4.44 },
+      { "year": 2020, "dividend": 0.23, "yield": 4.86 },
+      { "year": 2021, "dividend": 0.25, "yield": 5.56 },
+      { "year": 2022, "dividend": 0.27, "yield": 6.0 },
+      { "year": 2023, "dividend": 0.3, "yield": 6.67 }
     ],
     "highsLows": {
-      "high": 12.18,
-      "low": 9.8
+      "high": 5.2,
+      "low": 4.0
     },
     "periodicalReturn": [
       {
         "name": "1 year",
-        "totalReturn": 13.28,
-        "ADIB Stock": 6.5,
-        "Return on Reinvested Dividends": 7.18
+        "totalReturn": 9.3,
+        "ADNOCDIST Stock": 6.2,
+        "Return on Reinvested Dividends": 3.1
       },
       {
         "name": "3 years",
-        "totalReturn": 129.05,
-        "ADIB Stock": 97.17,
-        "Return on Reinvested Dividends": 31.89
+        "totalReturn": 48.5,
+        "ADNOCDIST Stock": 32.7,
+        "Return on Reinvested Dividends": 15.8
       },
       {
         "name": "5 years",
-        "totalReturn": 224.31,
-        "ADIB Stock": 147.56,
-        "Return on Reinvested Dividends": 76.75
+        "totalReturn": 85.7,
+        "ADNOCDIST Stock": 54.2,
+        "Return on Reinvested Dividends": 31.5
       }
     ],
     "financials": {
       "valuation": {
-        "Market Capitalization": "39.589B",
-        "Enterprise Value (MRQ)": "19.492B",
+        "Market Capitalization": "56.25B",
+        "Enterprise Value (MRQ)": "38.5B",
         "Enterprise Value/EBITDA (TTM)": null,
-        "Total Shares Outstanding": "3.632B",
+        "Total Shares Outstanding": "12.5B",
         "Number of Employees": null,
         "Number of Shareholders": null,
-        "Price to Earnings Ratio (TTM)": "7.9086",
-        "Price to Revenue Ratio (TTM)": "2.7492",
-        "Price to Book (FY)": "1.9252",
-        "Price to Sales (FY)": "2.9361"
+        "Price to Earnings Ratio (TTM)": "11.4800",
+        "Price to Revenue Ratio (TTM)": "1.7000",
+        "Price to Book (FY)": "3.2000",
+        "Price to Sales (FY)": "1.8000"
       },
       "balance sheet": {
-        "Quick Ratio (MRQ)": "0.3669",
-        "Current Ratio (MRQ)": "0.3669",
-        "Debt to Equity Ratio (MRQ)": "0.6023",
-        "Net Debt (MRQ)": "-21.335B",
-        "Total Debt (MRQ)": "11.117B",
-        "Total Assets (MRQ)": "194.647B"
+        "Quick Ratio (MRQ)": "0.5000",
+        "Current Ratio (MRQ)": "0.6000",
+        "Debt to Equity Ratio (MRQ)": "0.4000",
+        "Net Debt (MRQ)": "12.000B",
+        "Total Debt (MRQ)": "22.000B",
+        "Total Assets (MRQ)": "88.000B"
       },
       "operating metrics": {
-        "Return on Assets (TTM)": "0.0270",
-        "Return on Equity (TTM)": "0.2825",
-        "Return on Invested Capital (TTM)": "0.2076",
+        "Return on Assets (TTM)": "0.0700",
+        "Return on Equity (TTM)": "0.3000",
+        "Return on Invested Capital (TTM)": "0.2500",
         "Revenue per Employee (FY)": null
       },
       "price history": {
-        "Average Volume (10 day)": "3.505M",
-        "1-Year Beta": "1.4602",
-        "52 Week High": "12.1800",
-        "52 Week Low": "9.8000"
+        "Average Volume (10 day)": "2.75M",
+        "1-Year Beta": "0.9800",
+        "52 Week High": "5.2000",
+        "52 Week Low": "4.0000"
       },
       "dividends": {
-        "Dividends Paid (FY)": "-1.871B",
-        "Dividend Yield Forward": "6.5561",
-        "Dividends per Share (FY)": "0.7146"
+        "Dividends Paid (FY)": "-3.750B",
+        "Dividend Yield Forward": "6.6667",
+        "Dividends per Share (FY)": "0.3000"
       },
       "margins": {
-        "Net Margin (TTM)": "34.76%",
+        "Net Margin (TTM)": "15.00%",
         "Gross Margin (TTM)": null,
-        "Operating Margin (TTM)": "41.09%",
-        "Pretax Margin (TTM)": "41.09%"
+        "Operating Margin (TTM)": "18.00%",
+        "Pretax Margin (TTM)": "18.00%"
       },
       "income statement": {
-        "Basic EPS (FY)": "1.2840",
-        "Basic EPS (TTM)": "1.3656",
-        "EPS Diluted (FY)": "1.2840",
-        "Net Income (FY)": "4.663B",
+        "Basic EPS (FY)": "0.5200",
+        "Basic EPS (TTM)": "0.5500",
+        "EPS Diluted (FY)": "0.5200",
+        "Net Income (FY)": "6.50B",
         "EBITDA (TTM)": null,
         "Gross Profit (MRQ)": null,
         "Gross Profit (FY)": null,
-        "Last Year Revenue (FY)": "13.36B",
-        "Total Revenue (FY)": "13.36B",
-        "Free Cash Flow (TTM)": "6.14B"
+        "Last Year Revenue (FY)": "28.00B",
+        "Total Revenue (FY)": "28.00B",
+        "Free Cash Flow (TTM)": "7.20B"
+      }
+    }
+  },
+  "ALDAR": {
+    "overview": {
+      "name": "Aldar Properties",
+      "url": "al-dar-properties",
+      "symbolOnADX": "ALDAR",
+      "sector": "Real Estate",
+      "incorporation": "12-Jan-04",
+      "listing": "23-Feb-05",
+      "price": "4.20",
+      "sharecapital": "7,862,629,603.00",
+      "description": "Aldar Properties is a leading real estate developer in the United Arab Emirates. The company is involved in the development, sales, investment, and management of real estate properties. Aldar operates through various segments including residential, commercial, retail, and hospitality. It also manages a portfolio of community retail, education, and hospitality assets. Aldar Properties was founded in 2004 and is headquartered in Abu Dhabi, United Arab Emirates."
+    },
+    "keyShareholders": [
+      { "name": "Mubadala Investment Company", "value": 25.0 },
+      { "name": "Abu Dhabi Investment Authority", "value": 12.0 },
+      { "name": "Other investors", "value": 63.0 }
+    ],
+    "stockOwnership": [
+      { "name": "Foreign Ownership", "value": 11.5 },
+      { "name": "GCC Nationals", "value": 7.2 },
+      { "name": "UAE Nationals", "value": 78.0 },
+      { "name": "Arab Countries", "value": 3.3 }
+    ],
+    "keyStatistics": {
+      "peRatio": 13.6,
+      "priceToSales": 2.2,
+      "priceToBook": 1.7,
+      "priceToCashFlow": 8.4,
+      "debtToEquity": 0.5,
+      "longTermDebtToEquity": 0.3,
+      "returnOnEquity": 12.3
+    },
+    "growth": {
+      "revenueGrowthYoY": 10.5,
+      "revenueGrowth5Y": 8.4,
+      "epsGrowthYoY": 14.8,
+      "epsGrowthTTM": 16.2,
+      "epsGrowth5Y": 9.7,
+      "epsGrowth3Y": 13.4
+    },
+    "dividends": [
+      { "year": 2019, "dividend": 0.14, "yield": 3.33 },
+      { "year": 2020, "dividend": 0.15, "yield": 3.57 },
+      { "year": 2021, "dividend": 0.16, "yield": 3.81 },
+      { "year": 2022, "dividend": 0.17, "yield": 4.05 },
+      { "year": 2023, "dividend": 0.18, "yield": 4.29 }
+    ],
+    "highsLows": {
+      "high": 4.8,
+      "low": 3.7
+    },
+    "periodicalReturn": [
+      {
+        "name": "1 year",
+        "totalReturn": 8.4,
+        "ALDAR Stock": 5.2,
+        "Return on Reinvested Dividends": 3.2
+      },
+      {
+        "name": "3 years",
+        "totalReturn": 38.6,
+        "ALDAR Stock": 25.4,
+        "Return on Reinvested Dividends": 13.2
+      },
+      {
+        "name": "5 years",
+        "totalReturn": 68.7,
+        "ALDAR Stock": 44.3,
+        "Return on Reinvested Dividends": 24.4
+      }
+    ],
+    "financials": {
+      "valuation": {
+        "Market Capitalization": "33.22B",
+        "Enterprise Value (MRQ)": "27.56B",
+        "Enterprise Value/EBITDA (TTM)": null,
+        "Total Shares Outstanding": "7.863B",
+        "Number of Employees": null,
+        "Number of Shareholders": null,
+        "Price to Earnings Ratio (TTM)": "13.6000",
+        "Price to Revenue Ratio (TTM)": "2.2000",
+        "Price to Book (FY)": "1.7000",
+        "Price to Sales (FY)": "2.3000"
+      },
+      "balance sheet": {
+        "Quick Ratio (MRQ)": "0.4200",
+        "Current Ratio (MRQ)": "0.5600",
+        "Debt to Equity Ratio (MRQ)": "0.5000",
+        "Net Debt (MRQ)": "14.000B",
+        "Total Debt (MRQ)": "16.000B",
+        "Total Assets (MRQ)": "40.000B"
+      },
+      "operating metrics": {
+        "Return on Assets (TTM)": "0.0540",
+        "Return on Equity (TTM)": "0.1230",
+        "Return on Invested Capital (TTM)": "0.0980",
+        "Revenue per Employee (FY)": null
+      },
+      "price history": {
+        "Average Volume (10 day)": "2.50M",
+        "1-Year Beta": "1.2100",
+        "52 Week High": "4.8000",
+        "52 Week Low": "3.7000"
+      },
+      "dividends": {
+        "Dividends Paid (FY)": "-1.415B",
+        "Dividend Yield Forward": "4.2857",
+        "Dividends per Share (FY)": "0.1800"
+      },
+      "margins": {
+        "Net Margin (TTM)": "19.00%",
+        "Gross Margin (TTM)": null,
+        "Operating Margin (TTM)": "24.00%",
+        "Pretax Margin (TTM)": "24.00%"
+      },
+      "income statement": {
+        "Basic EPS (FY)": "0.3400",
+        "Basic EPS (TTM)": "0.3600",
+        "EPS Diluted (FY)": "0.3400",
+        "Net Income (FY)": "2.670B",
+        "EBITDA (TTM)": null,
+        "Gross Profit (MRQ)": null,
+        "Gross Profit (FY)": null,
+        "Last Year Revenue (FY)": "14.05B",
+        "Total Revenue (FY)": "14.05B",
+        "Free Cash Flow (TTM)": "3.50B"
       }
     }
   }

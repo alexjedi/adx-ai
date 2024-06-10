@@ -29,12 +29,14 @@ export function generateADXURL(ticker: string) {
     FAB: 'AEN000101016',
     ADIB: 'AEA000801018',
     ADNOCDIST: 'AEA006101017',
+    ALDAR: 'AEA002001013',
   }
 
   const companyTitles = {
     FAB: 'First%20Abu%20Dhabi%20Bank',
     ADIB: 'Abu%20Dhabi%20Islamic%20Bank',
     ADNOCDIST: 'Abu%20Dhabi%20National%20Oil%20Company%20For%20Distribution',
+    ALDAR: 'Al%20Dar%20Properties',
   }
 
   const companyId = tickers[ticker]

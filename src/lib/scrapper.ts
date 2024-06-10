@@ -17,8 +17,10 @@ export async function scrapePageFinancials(ticker: string) {
 
     const data = await response.json()
 
-    if (data.extractedText) {
-      return data.extractedText
+    console.log('data', data.financials)
+
+    if (data.financials) {
+      return data.financials
     } else if (data.urlerror) {
       return data.urlerror
     } else {
@@ -46,9 +48,10 @@ export async function scrapePageOverview(ticker: string) {
     )
 
     const data = await response.json()
+    console.log('data', data)
 
-    if (data.extractedText) {
-      return data.extractedText
+    if (data['TICKER']) {
+      return data['TICKER']
     } else if (data.urlerror) {
       return data.urlerror
     } else {

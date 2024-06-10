@@ -1,0 +1,131 @@
+{
+  "TICKER": {
+    "overview": {
+      "name": "",
+      "url": "",
+      "symbolOnADX": "",
+      "sector": "",
+      "incorporation": "",
+      "listing": "",
+      "sharecapital": "",
+      "price": "",
+      "description": ""
+    },
+    "keyShareholders": [
+      { "name": "", "value": "" },
+      { "name": "", "value": "" },
+      { "name": "", "value": "" }
+    ],
+    "stockOwnership": [
+      { "name": "", "value": "" },
+      { "name": "", "value": "" },
+      { "name": "", "value": "" },
+      { "name": "", "value": "" }
+    ],
+    "keyStatistics": {
+      "peRatio": "",
+      "priceToSales": "",
+      "priceToBook": "",
+      "priceToCashFlow": "",
+      "debtToEquity": "",
+      "longTermDebtToEquity": "",
+      "returnOnEquity": ""
+    },
+    "growth": {
+      "revenueGrowthYoY": "",
+      "revenueGrowth5Y": "",
+      "epsGrowthYoY": "",
+      "epsGrowthTTM": "",
+      "epsGrowth5Y": "",
+      "epsGrowth3Y": ""
+    },
+    "dividends": [
+      { "year": "", "dividend": "", "yield": "" },
+      { "year": "", "dividend": "", "yield": "" },
+      { "year": "", "dividend": "", "yield": "" },
+      { "year": "", "dividend": "", "yield": "" },
+      { "year": "", "dividend": "", "yield": "" }
+    ],
+    "highsLows": {
+      "high": "",
+      "low": ""
+    },
+    "periodicalReturn": [
+      {
+        "name": "",
+        "totalReturn": "",
+        "ADIB Stock": "",
+        "Return on Reinvested Dividends": ""
+      },
+      {
+        "name": "",
+        "totalReturn": "",
+        "ADIB Stock": "",
+        "Return on Reinvested Dividends": ""
+      },
+      {
+        "name": "",
+        "totalReturn": "",
+        "ADIB Stock": "",
+        "Return on Reinvested Dividends": ""
+      }
+    ],
+    "financials": {
+      "valuation": {
+        "Market Capitalization": "",
+        "Enterprise Value (MRQ)": "",
+        "Enterprise Value/EBITDA (TTM)": "",
+        "Total Shares Outstanding": "",
+        "Number of Employees": "",
+        "Number of Shareholders": "",
+        "Price to Earnings Ratio (TTM)": "",
+        "Price to Revenue Ratio (TTM)": "",
+        "Price to Book (FY)": "",
+        "Price to Sales (FY)": ""
+      },
+      "balance sheet": {
+        "Quick Ratio (MRQ)": "",
+        "Current Ratio (MRQ)": "",
+        "Debt to Equity Ratio (MRQ)": "",
+        "Net Debt (MRQ)": "",
+        "Total Debt (MRQ)": "",
+        "Total Assets (MRQ)": ""
+      },
+      "operating metrics": {
+        "Return on Assets (TTM)": "",
+        "Return on Equity (TTM)": "",
+        "Return on Invested Capital (TTM)": "",
+        "Revenue per Employee (FY)": ""
+      },
+      "price history": {
+        "Average Volume (10 day)": "",
+        "1-Year Beta": "",
+        "52 Week High": "",
+        "52 Week Low": ""
+      },
+      "dividends": {
+        "Dividends Paid (FY)": "",
+        "Dividend Yield Forward": "",
+        "Dividends per Share (FY)": ""
+      },
+      "margins": {
+        "Net Margin (TTM)": "",
+        "Gross Margin (TTM)": "",
+        "Operating Margin (TTM)": "",
+        "Pretax Margin (TTM)": ""
+      },
+      "income statement": {
+        "Basic EPS (FY)": "",
+        "Basic EPS (TTM)": "",
+        "EPS Diluted (FY)": "",
+        "Net Income (FY)": "",
+        "EBITDA (TTM)": "",
+        "Gross Profit (MRQ)": "",
+        "Gross Profit (FY)": "",
+        "Last Year Revenue (FY)": "",
+        "Total Revenue (FY)": "",
+        "Free Cash Flow (TTM)": ""
+      }
+    }
+  }
+}

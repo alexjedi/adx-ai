@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { NextResponse } from 'next/server'
 import puppeteer from 'puppeteer'
 
@@ -10,7 +12,7 @@ export async function POST(request: Request) {
 
     const urlRegex = /^(http|https):\/\/[^ "]+$/
 
-    https: if (!urlRegex.test(url)) {
+    if (!urlRegex.test(url)) {
       return NextResponse.json({ urlerror: 'invalid url' })
     }
 
@@ -23,16 +25,65 @@ export async function POST(request: Request) {
     console.log('Navigating to URL:', url)
     await page.goto(url, { waitUntil: 'networkidle2' })
 
-    await new Promise((r) => setTimeout(r, 5000))
+    await new Promise((r) => setTimeout(r, 2000))
 
-    const extractedText = await page.$eval('*', (el: any) => el.innerText)
-    console.log('Extracted Text:', extractedText)
+    const financials = await page.evaluate(() => {
+      const data = {
+        financials: {
+          valuation: {},
+          'balance sheet': {},
+          'operating metrics': {},
+          'price history': {},
+          dividends: {},
+          margins: {},
+          'income statement': {},
+        },
+      }
+
+      const sectionMapping = {
+        Valuation: 'valuation',
+        '     Balance Sheet     ': 'balance sheet',
+        'Operating Metrics': 'operating metrics',
+        'Price History': 'price history',
+        Dividends: 'dividends',
+        Margins: 'margins',
+        'Income Statement': 'income statement',
+      }
+
+      const sections = document.querySelectorAll('.tv-widget-fundamentals__item')
+
+      sections.forEach((section) => {
+        const titleElement = section.querySelector('.tv-widget-fundamentals__title')
+        if (titleElement) {
+          const titleText = titleElement.textContent.trim()
+          const mappedTitle = sectionMapping[titleText]
+
+          if (mappedTitle) {
+            const rows = section.querySelectorAll('.tv-widget-fundamentals__row')
+
+            rows.forEach((row) => {
+              const labelElement = row.querySelector('.tv-widget-fundamentals__label')
+              const valueElement = row.querySelector('.tv-widget-fundamentals__value')
+              if (labelElement && valueElement) {
+                const label = labelElement.textContent.trim()
+                const value = valueElement.textContent.trim()
+                if (data.financials[mappedTitle]) {
+                  data.financials[mappedTitle][label] = value
+                }
+              }
+            })
+          }
+        }
+      })
+
+      return data
+    })
 
     if (browser) {
       await browser.close()
     }
 
-    return NextResponse.json({ extractedText })
+    return NextResponse.json(financials)
   } catch (error) {
     if (browser) {
       await browser.close()

@@ -118,7 +118,7 @@ const Navigation: React.FC<NavigationProps> = ({ onSearchClick }) => {
           </nav>
         </SheetContent>
       </Sheet>
-      <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-2">
+      <div className="flex w-full items-center gap-4 ml-auto md:ml-auto md:gap-2 lg:gap-2">
         <form className="ml-auto flex-1 sm:flex-initial">
           <div className="relative">
             <div
@@ -126,8 +126,10 @@ const Navigation: React.FC<NavigationProps> = ({ onSearchClick }) => {
               className="flex space-x-2 bg-secondary px-4 py-2 items-center rounded-full border border-transparent cursor-pointer hover:border-foreground transition duration-300 ease-in-out"
             >
               <Search className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm text-muted-foreground font-medium">Enter ADX ticker</span>
-              <p className="text-sm text-muted-foreground">
+              <span className="text-sm text-muted-foreground font-medium hidden md:block">
+                Enter ADX ticker
+              </span>
+              <p className="text-sm text-muted-foreground hidden md:block">
                 <span className="text-xs">⌘</span>K
               </p>
             </div>
