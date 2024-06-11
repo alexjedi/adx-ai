@@ -152,51 +152,51 @@
       { "name": "Arab Countries", "value": 0.49 }
     ],
     "keyStatistics": {
-      "peRatio": 10.34,
-      "priceToSales": 4.25,
-      "priceToBook": 1.55,
-      "priceToCashFlow": 7.82,
-      "debtToEquity": 6.43,
-      "longTermDebtToEquity": 0.91,
-      "returnOnEquity": 8.57
+      "peRatio": 9.2,
+      "priceToSales": 4.1,
+      "priceToBook": 1.6,
+      "priceToCashFlow": 7.5,
+      "debtToEquity": 6.1,
+      "longTermDebtToEquity": 0.9,
+      "returnOnEquity": 7.8
     },
     "growth": {
-      "revenueGrowthYoY": 28.7,
-      "revenueGrowth5Y": 11.89,
-      "epsGrowthYoY": 24.3,
-      "epsGrowthTTM": 27.46,
-      "epsGrowth5Y": 12.78,
-      "epsGrowth3Y": 34.22
+      "revenueGrowthYoY": 26.3,
+      "revenueGrowth5Y": 12.0,
+      "epsGrowthYoY": 25.4,
+      "epsGrowthTTM": 28.1,
+      "epsGrowth5Y": 13.1,
+      "epsGrowth3Y": 32.8
     },
     "dividends": [
-      { "year": 2019, "dividend": 0.5, "yield": 3.25 },
-      { "year": 2020, "dividend": 0.45, "yield": 3.12 },
-      { "year": 2021, "dividend": 0.55, "yield": 3.57 },
-      { "year": 2022, "dividend": 0.65, "yield": 4.22 },
-      { "year": 2023, "dividend": 0.75, "yield": 4.87 }
+      { "year": 2019, "dividend": 0.5, "yield": 3.2 },
+      { "year": 2020, "dividend": 0.45, "yield": 3.1 },
+      { "year": 2021, "dividend": 0.55, "yield": 3.6 },
+      { "year": 2022, "dividend": 0.65, "yield": 4.3 },
+      { "year": 2023, "dividend": 0.75, "yield": 4.9 }
     ],
     "highsLows": {
-      "high": 15.74,
-      "low": 11.52
+      "high": 15.6,
+      "low": 11.4
     },
     "periodicalReturn": [
       {
         "name": "1 year",
-        "totalReturn": 12.47,
-        "FAB Stock": 8.1,
-        "Return on Reinvested Dividends": 4.37
+        "totalReturn": 11.9,
+        "FAB Stock": 7.8,
+        "Return on Reinvested Dividends": 4.1
       },
       {
         "name": "3 years",
-        "totalReturn": 95.63,
-        "FAB Stock": 62.45,
-        "Return on Reinvested Dividends": 33.18
+        "totalReturn": 93.4,
+        "FAB Stock": 60.2,
+        "Return on Reinvested Dividends": 33.2
       },
       {
         "name": "5 years",
-        "totalReturn": 158.92,
-        "FAB Stock": 102.76,
-        "Return on Reinvested Dividends": 56.16
+        "totalReturn": 157.8,
+        "FAB Stock": 101.5,
+        "Return on Reinvested Dividends": 56.3
       }
     ],
     "financials": {
@@ -281,51 +281,51 @@
       { "name": "Arab Countries", "value": 0.2 }
     ],
     "keyStatistics": {
-      "peRatio": 12.5,
-      "priceToSales": 1.8,
-      "priceToBook": 3.4,
-      "priceToCashFlow": 9.6,
-      "debtToEquity": 0.4,
-      "longTermDebtToEquity": 0.2,
-      "returnOnEquity": 20.5
+      "peRatio": 16,
+      "priceToSales": 1.28,
+      "priceToBook": 1.6,
+      "priceToCashFlow": 7.5,
+      "debtToEquity": 4.1,
+      "longTermDebtToEquity": 0.62,
+      "returnOnEquity": 8.57
     },
     "growth": {
-      "revenueGrowthYoY": 12.7,
-      "revenueGrowth5Y": 10.2,
-      "epsGrowthYoY": 15.6,
-      "epsGrowthTTM": 18.3,
-      "epsGrowth5Y": 11.4,
-      "epsGrowth3Y": 14.8
+      "revenueGrowthYoY": 11.8,
+      "revenueGrowth5Y": 12.9,
+      "epsGrowthYoY": 25.4,
+      "epsGrowthTTM": 15.4,
+      "epsGrowth5Y": 12.0,
+      "epsGrowth3Y": 13.1
     },
     "dividends": [
-      { "year": 2019, "dividend": 0.2, "yield": 4.44 },
-      { "year": 2020, "dividend": 0.23, "yield": 4.86 },
-      { "year": 2021, "dividend": 0.25, "yield": 5.56 },
-      { "year": 2022, "dividend": 0.27, "yield": 6.0 },
-      { "year": 2023, "dividend": 0.3, "yield": 6.67 }
+      { "year": 2019, "dividend": 0.1029, "yield": 3.25 },
+      { "year": 2020, "dividend": 0.1029, "yield": 3.12 },
+      { "year": 2021, "dividend": 0.1029, "yield": 3.57 },
+      { "year": 2022, "dividend": 0.1029, "yield": 4.22 },
+      { "year": 2023, "dividend": 0.1029, "yield": 5.3 }
     ],
     "highsLows": {
-      "high": 4.08,
-      "low": 3.24
+      "high": 4.15,
+      "low": 2.78
     },
     "periodicalReturn": [
       {
         "name": "1 year",
-        "totalReturn": 9.3,
-        "ADNOCDIST Stock": 6.2,
-        "Return on Reinvested Dividends": 3.1
+        "totalReturn": 11.9,
+        "FAB Stock": 7.8,
+        "Return on Reinvested Dividends": 4.1
       },
       {
         "name": "3 years",
-        "totalReturn": 48.5,
-        "ADNOCDIST Stock": 32.7,
-        "Return on Reinvested Dividends": 15.8
+        "totalReturn": 93.4,
+        "FAB Stock": 60.2,
+        "Return on Reinvested Dividends": 33.2
       },
       {
         "name": "5 years",
-        "totalReturn": 85.7,
-        "ADNOCDIST Stock": 54.2,
-        "Return on Reinvested Dividends": 31.5
+        "totalReturn": 157.8,
+        "FAB Stock": 101.5,
+        "Return on Reinvested Dividends": 56.3
       }
     ],
     "financials": {
@@ -412,28 +412,28 @@
       { "name": "Arab Countries", "value": 0.36 }
     ],
     "keyStatistics": {
-      "peRatio": 13.6,
-      "priceToSales": 2.2,
-      "priceToBook": 1.7,
-      "priceToCashFlow": 8.4,
-      "debtToEquity": 0.5,
-      "longTermDebtToEquity": 0.3,
-      "returnOnEquity": 12.3
+      "peRatio": 10.39,
+      "priceToSales": 2.52,
+      "priceToBook": 1.15,
+      "priceToCashFlow": 7.89,
+      "debtToEquity": 1.29,
+      "longTermDebtToEquity": 0.83,
+      "returnOnEquity": 14.2
     },
     "growth": {
-      "revenueGrowthYoY": 10.5,
-      "revenueGrowth5Y": 8.4,
-      "epsGrowthYoY": 14.8,
-      "epsGrowthTTM": 16.2,
-      "epsGrowth5Y": 9.7,
-      "epsGrowth3Y": 13.4
+      "revenueGrowthYoY": 19.0,
+      "revenueGrowth5Y": 16.3,
+      "epsGrowthYoY": 40.0,
+      "epsGrowthTTM": 15.4,
+      "epsGrowth5Y": 16.0,
+      "epsGrowth3Y": 17.1
     },
     "dividends": [
-      { "year": 2019, "dividend": 0.14, "yield": 3.33 },
-      { "year": 2020, "dividend": 0.15, "yield": 3.57 },
-      { "year": 2021, "dividend": 0.16, "yield": 3.81 },
-      { "year": 2022, "dividend": 0.17, "yield": 4.05 },
-      { "year": 2023, "dividend": 0.18, "yield": 4.29 }
+      { "year": 2019, "dividend": 0.17, "yield": 2.92 },
+      { "year": 2020, "dividend": 0.17, "yield": 3.12 },
+      { "year": 2021, "dividend": 0.17, "yield": 3.57 },
+      { "year": 2022, "dividend": 0.17, "yield": 4.22 },
+      { "year": 2023, "dividend": 0.17, "yield": 2.92 }
     ],
     "highsLows": {
       "high": 6.15,
@@ -442,21 +442,21 @@
     "periodicalReturn": [
       {
         "name": "1 year",
-        "totalReturn": 8.4,
-        "ALDAR Stock": 5.2,
-        "Return on Reinvested Dividends": 3.2
+        "totalReturn": 14.99,
+        "FAB Stock": 10.0,
+        "Return on Reinvested Dividends": 4.99
       },
       {
         "name": "3 years",
-        "totalReturn": 38.6,
-        "ALDAR Stock": 25.4,
-        "Return on Reinvested Dividends": 13.2
+        "totalReturn": 45.2,
+        "FAB Stock": 30.0,
+        "Return on Reinvested Dividends": 15.2
       },
       {
         "name": "5 years",
-        "totalReturn": 68.7,
-        "ALDAR Stock": 44.3,
-        "Return on Reinvested Dividends": 24.4
+        "totalReturn": 89.6,
+        "FAB Stock": 60.0,
+        "Return on Reinvested Dividends": 29.6
       }
     ],
     "financials": {
