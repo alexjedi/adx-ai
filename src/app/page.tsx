@@ -133,7 +133,11 @@ export default function Dashboard() {
     const extractedOver = await scrapePageOverview(ticker)
     console.log('extractedFinance', extractedFinance)
     console.log('extractedOver', extractedOver)
-    setExtractedFinancials(extractedFinance)
+    if (extractedOver === 'URL cannot be loaded') {
+      setExtractedFinancials(empty['TICKER'].financials)
+    } else {
+      setExtractedFinancials(extractedFinance)
+    }
     if (extractedOver === 'URL cannot be loaded') {
       setExtractedOverview(empty['TICKER'])
     } else {
@@ -155,7 +159,11 @@ export default function Dashboard() {
       const extractedOver = await scrapePageOverview(ticker)
       console.log('extractedFinance', extractedFinance)
       console.log('extractedOver', extractedOver)
-      setExtractedFinancials(extractedFinance)
+      if (extractedOver === 'URL cannot be loaded') {
+        setExtractedFinancials(empty['TICKER'].financials)
+      } else {
+        setExtractedFinancials(extractedFinance)
+      }
       if (extractedOver === 'URL cannot be loaded') {
         setExtractedOverview(empty['TICKER'])
       } else {

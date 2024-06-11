@@ -163,7 +163,6 @@ export async function POST(request: Request) {
       data.TICKER.overview.sector = document
         .querySelector('.company-info .domain-name')
         .textContent.trim()
-      data.TICKER.overview.url = ''
       data.TICKER.overview.symbolOnADX = document
         .querySelector('.company-info .c-symbol')
         .textContent.trim()
@@ -214,13 +213,13 @@ export async function POST(request: Request) {
         'Price to Sales (FY)': 'Price to Sales (FY)',
       }
 
-      document.querySelectorAll('.financials li').forEach((li) => {
-        const label = li.querySelector('span:nth-child(1)').textContent.trim()
-        const value = li.querySelector('span:nth-child(2)').textContent.trim()
-        if (map[label]) {
-          financials[map[label]] = value
-        }
-      })
+      // document.querySelectorAll('.financials li').forEach((li) => {
+      //   const label = li.querySelector('span:nth-child(1)').textContent.trim()
+      //   const value = li.querySelector('span:nth-child(2)').textContent.trim()
+      //   if (map[label]) {
+      //     financials[map[label]] = value
+      //   }
+      // })
 
       return data
     })
