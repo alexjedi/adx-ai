@@ -245,7 +245,7 @@ export default function Dashboard() {
             </div>
             <Button
               variant="outline"
-              className="md:ml-auto mr-4"
+              className="md:ml-auto mr-4 mt-2 md:mt-0 flex md:inline-flex"
               onClick={() => window.location.reload()}
             >
               <RefreshCcw className="h-4 w-4 mr-2" />
@@ -253,7 +253,7 @@ export default function Dashboard() {
             </Button>
             <Button
               variant="outline"
-              className="md:ml-auto"
+              className="md:ml-auto mt-2 md:mt-0 flex md:inline-flex"
               onClick={() => handlePrint(null, () => contentToPrint.current)}
             >
               <Printer className="h-4 w-4 mr-2" />
@@ -382,7 +382,9 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {(data as unknown as Data)[ticker]?.keyStatistics.peRatio}
+                            {(data as unknown as Data)[ticker]?.financials.valuation[
+                              'Price to Earnings Ratio (TTM)'
+                            ].slice(0, 4)}
                           </div>
                         </CardContent>
                       </Card>
@@ -393,7 +395,9 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {(data as unknown as Data)[ticker]?.keyStatistics.priceToSales}
+                            {(data as unknown as Data)[ticker]?.financials.valuation[
+                              'Price to Sales (FY)'
+                            ].slice(0, 4)}
                           </div>
                         </CardContent>
                       </Card>
@@ -404,7 +408,9 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {(data as unknown as Data)[ticker]?.keyStatistics.priceToBook}
+                            {(data as unknown as Data)[ticker]?.financials.valuation[
+                              'Price to Book (FY)'
+                            ].slice(0, 4)}
                           </div>
                         </CardContent>
                       </Card>
@@ -430,7 +436,9 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {(data as unknown as Data)[ticker]?.keyStatistics.debtToEquity}
+                            {(data as unknown as Data)[ticker]?.financials['balance sheet'][
+                              'Debt to Equity Ratio (MRQ)'
+                            ].slice(0, 4)}
                           </div>
                         </CardContent>
                       </Card>
@@ -454,7 +462,9 @@ export default function Dashboard() {
                         </CardHeader>
                         <CardContent>
                           <div className="text-xl font-semibold">
-                            {(data as unknown as Data)[ticker]?.keyStatistics.returnOnEquity}
+                            {(data as unknown as Data)[ticker]?.financials['operating metrics'][
+                              'Return on Equity (TTM)'
+                            ].slice(0, 4)}
                           </div>
                         </CardContent>
                       </Card>
