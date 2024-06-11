@@ -12,9 +12,9 @@
       "description": "Abu Dhabi Islamic Bank – Public Joint Stock Company (the Bank) is incorporated in the Emirate of Abu Dhabi - UAE in accordance with the provision of UAE Federal Commercial Companies Law No. (8) of 1984 (as amended) and the Amiri Decree No. 9 of 1997."
     },
     "keyShareholders": [
-      { "name": "Emirates International Investment Company LLC", "value": 53.65 },
-      { "name": "Emirates National Bank of Dubai PJSC", "value": 39.4 },
-      { "name": "Other investors", "value": 6.95 }
+      { "name": "Emirates International Investment Company LLC", "value": 39.4 },
+      { "name": "Emirates National Bank of Dubai PJSC", "value": 6.76 },
+      { "name": "Other investors", "value": 53.84 }
     ],
     "stockOwnership": [
       { "name": "Foreign Ownership", "value": 14.29 },
@@ -26,7 +26,7 @@
       "peRatio": 8.27,
       "priceToSales": 3.77,
       "priceToBook": 1.77,
-      "priceToCashFlow": 6.93,
+      "priceToCashFlow": 5.94,
       "debtToEquity": 8.64,
       "longTermDebtToEquity": 0.73,
       "returnOnEquity": 3.05
@@ -141,9 +141,8 @@
       "description": "The UAE’s largest bank and one of the world’s largest financial institutions, the new bank offers an extensive range of tailor-made solutions, products and services, in addition to customised experiences. Through its strategic offerings, it looks to meet the banking needs of customers across the world via its market-leading Corporate and Investment Banking and Personal Banking franchises. Headquartered in Abu Dhabi in Business Park, Khalifa Park, the bank’s international network spans 19 countries across the world, providing the global relationships, expertise and financial strength to support local, regional and international businesses seeking to do business at home and abroad. In line with its commitment to put customers first and help them grow stronger, the new bank continually invests in people and technology to create the most customer-friendly banking experience possible, and support the growth ambitions of shareholders, residents, entrepreneurs and the UAE’s economy. Through a strong, diversified balance sheet, leading efficiency and a solid corporate governance structure in place, the new bank is set to drive forward growth for the business and for the region."
     },
     "keyShareholders": [
-      { "name": "One Hundred and Fifteen Investment - One Person Company LLC", "value": 37.8604 },
-      { "name": "Abu Dhabi Investment Council", "value": 33.3 },
-      { "name": "Other investors", "value": 29.56 }
+      { "name": "One Hundred and Fifteen Investment - One Person Company LLC", "value": 37.86 },
+      { "name": "Other investors", "value": 62.14 }
     ],
     "stockOwnership": [
       { "name": "Foreign Ownership", "value": 19.64 },
@@ -155,7 +154,7 @@
       "peRatio": 9.2,
       "priceToSales": 4.1,
       "priceToBook": 1.6,
-      "priceToCashFlow": 7.5,
+      "priceToCashFlow": 6.55,
       "debtToEquity": 6.1,
       "longTermDebtToEquity": 0.9,
       "returnOnEquity": 7.8
@@ -270,9 +269,8 @@
       "description": "ADNOC Distribution is the number one retail and wholesale fuel brand and convenience store operator in the United Arab Emirates. We are currently the sole fuel distributor in the emirate of Abu Dhabi and have a dominant market position in the northern emirates of Sharjah, Ras Al Khaimah, Fujairah, Ajman and Umm Al Quwain. We began our expansion into Dubai in 2018 and operated six fuel station as of 31 December 2019. We will continue to grow our network in the UAE and Dubai in coming years. We are also the leading marketer and distributor of fuels to commercial, industrial and government customers in the UAE. We provide aviation fuel and refueling and related aviation services to strategic customers throughout the UAE as well as refueling and related services to civil aviation customers at seven airports in the UAE. To further compliment the services we offer at our fuel and retail stations, we operate the only government-authorized vehicle inspection centers in Abu Dhabi and offer car care services such as lube changes, tire changes and car washes at many of our locations. In addition, we lease space at our service stations to restaurants and other service providers, including major household brands such as McDonalds, KFC and Starbucks."
     },
     "keyShareholders": [
-      { "name": "Abu Dhabi National Oil Company (ADNOC)", "value": 77 },
-      { "name": "Institutional Investors", "value": 18 },
-      { "name": "Other investors", "value": 5 }
+      { "name": "Abu Dhabi National Oil Company (ADNOC)", "value": 76.99 },
+      { "name": "Other investors", "value": 23.01 }
     ],
     "stockOwnership": [
       { "name": "Foreign Ownership", "value": 6.66 },
@@ -284,7 +282,7 @@
       "peRatio": 16,
       "priceToSales": 1.28,
       "priceToBook": 1.6,
-      "priceToCashFlow": 7.5,
+      "priceToCashFlow": 9.55,
       "debtToEquity": 4.1,
       "longTermDebtToEquity": 0.62,
       "returnOnEquity": 8.57
@@ -399,11 +397,11 @@
       "description": "ALDAR Properties PJSC is a premier real estate development, management and investment company headquartered in Abu Dhabi, UAE."
     },
     "keyShareholders": [
-      { "name": "Mamoura Diversified Global Holding Company PJSC", "value": 25.124 },
-      { "name": "Sublime Commercial Investment - One Person Company LLC", "value": 12.2097 },
-      { "name": "Sogno Three - Sole Proprietorship LLC", "value": 7.9527 },
-      { "name": "Sogno2 - Sole Proprietorship LLC", "value": 6.3592 },
-      { "name": "Other investors", "value": 48.3544 }
+      { "name": "Mamoura Diversified Global Holding Company PJSC", "value": 25.12 },
+      { "name": "Sublime Commercial Investment - One Person Company LLC", "value": 12.2 },
+      { "name": "Sogno Three - Sole Proprietorship LLC", "value": 7.95 },
+      { "name": "Sogno2 - Sole Proprietorship LLC", "value": 6.35 },
+      { "name": "Other investors", "value": 48.35 }
     ],
     "stockOwnership": [
       { "name": "Foreign Ownership", "value": 21.98 },
@@ -415,7 +413,7 @@
       "peRatio": 10.39,
       "priceToSales": 2.52,
       "priceToBook": 1.15,
-      "priceToCashFlow": 7.89,
+      "priceToCashFlow": 12.6,
       "debtToEquity": 1.29,
       "longTermDebtToEquity": 0.83,
       "returnOnEquity": 14.2

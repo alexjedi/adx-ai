@@ -17,14 +17,18 @@ const PieChartComponent = ({
 
   return (
     <ResponsiveContainer width="100%" height={!isScreenLessThan400px ? 300 : 500}>
-      <PieChart width={400} height={!isScreenLessThan400px ? 300 : 500}>
+      <PieChart
+        cx="50%"
+        cy="50%"
+        width={400}
+        margin={{ top: 0, right: 0, bottom: 0, left: isScreenLessThan400px ? 140 : 0 }}
+        height={!isScreenLessThan400px ? 300 : 500}
+      >
         <Pie
           data={data}
           dataKey="value"
           innerRadius={60}
           outerRadius={80}
-          cx="50%"
-          cy="50%"
           fill="#8884d8"
           paddingAngle={10}
           label={!isOnlyValue ? ({ value }) => `${value}%` : false}
