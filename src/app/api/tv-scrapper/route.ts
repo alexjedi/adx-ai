@@ -8,7 +8,7 @@ const CHROMIUM_PATH =
 
 async function getBrowser() {
   console.log('Current VERCEL_ENV:', process.env.VERCEL_ENV)
-  if (process.env.VERCEL_ENV === 'production') {
+  if (process.env.VERCEL_ENV === 'production' || process.env.VERCEL_ENV === 'preview') {
     const chromium = await import('@sparticuz/chromium-min').then((mod) => mod.default)
 
     const puppeteerCore = await import('puppeteer-core').then((mod) => mod.default)
