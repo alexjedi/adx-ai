@@ -179,7 +179,7 @@ export async function POST(request: Request) {
         .querySelector('.company-info2 .desc')
         .textContent.trim()
       data.TICKER.overview.price = document
-        .querySelector('.content-inner .box1 .num.color1')
+        .querySelector('.content-inner .box1 .num')
         .textContent.trim()
 
       data.TICKER.stockOwnership[0].name = 'Foreign Ownership'
