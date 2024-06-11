@@ -28,7 +28,7 @@
       "priceToBook": 1.77,
       "priceToCashFlow": 5.94,
       "debtToEquity": 8.64,
-      "longTermDebtToEquity": 0.73,
+      "longTermDebtToEquity": 0.33,
       "returnOnEquity": 3.05
     },
     "growth": {
@@ -156,7 +156,7 @@
       "priceToBook": 1.6,
       "priceToCashFlow": 6.55,
       "debtToEquity": 6.1,
-      "longTermDebtToEquity": 0.9,
+      "longTermDebtToEquity": 0.58,
       "returnOnEquity": 7.8
     },
     "growth": {
@@ -284,7 +284,7 @@
       "priceToBook": 1.6,
       "priceToCashFlow": 9.55,
       "debtToEquity": 4.1,
-      "longTermDebtToEquity": 0.62,
+      "longTermDebtToEquity": 2.03,
       "returnOnEquity": 8.57
     },
     "growth": {
@@ -415,7 +415,7 @@
       "priceToBook": 1.15,
       "priceToCashFlow": 12.6,
       "debtToEquity": 1.29,
-      "longTermDebtToEquity": 0.83,
+      "longTermDebtToEquity": 0.44,
       "returnOnEquity": 14.2
     },
     "growth": {
