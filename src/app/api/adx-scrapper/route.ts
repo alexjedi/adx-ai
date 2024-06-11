@@ -49,7 +49,7 @@ export async function POST(request: Request) {
     console.log('Navigating to URL:', url)
     await page.goto(url, { waitUntil: 'networkidle2' })
 
-    await new Promise((r) => setTimeout(r, 3000))
+    await new Promise((r) => setTimeout(r, 10000))
 
     const financials = await page.evaluate(() => {
       const data = {
@@ -184,66 +184,68 @@ export async function POST(request: Request) {
         },
       }
 
-      data.TICKER.overview.sector = document
-        .querySelector('.company-info .domain-name')
-        .textContent.trim()
-      data.TICKER.overview.symbolOnADX = document
-        .querySelector('.company-info .c-symbol')
-        .textContent.trim()
-      data.TICKER.overview.incorporation = document
-        .querySelector('.company-info2 li:nth-child(3) span:nth-child(2)')
-        .textContent.trim()
-      data.TICKER.overview.listing = document
-        .querySelector('.company-info2 li:nth-child(2) span:nth-child(2)')
-        .textContent.trim()
-      data.TICKER.overview.sharecapital = document
-        .querySelector('.company-info2 li:nth-child(1) span:nth-child(2)')
-        .textContent.trim()
-      data.TICKER.overview.description = document
-        .querySelector('.company-info2 .desc')
-        .textContent.trim()
-      data.TICKER.overview.price = document
-        .querySelector('.content-inner .box1 .num')
-        .textContent.trim()
+      if (document) {
+        data.TICKER.overview.sector = document
+          .querySelector('.company-info .domain-name')
+          .textContent.trim()
+        data.TICKER.overview.symbolOnADX = document
+          .querySelector('.company-info .c-symbol')
+          .textContent.trim()
+        data.TICKER.overview.incorporation = document
+          .querySelector('.company-info2 li:nth-child(3) span:nth-child(2)')
+          .textContent.trim()
+        data.TICKER.overview.listing = document
+          .querySelector('.company-info2 li:nth-child(2) span:nth-child(2)')
+          .textContent.trim()
+        data.TICKER.overview.sharecapital = document
+          .querySelector('.company-info2 li:nth-child(1) span:nth-child(2)')
+          .textContent.trim()
+        data.TICKER.overview.description = document
+          .querySelector('.company-info2 .desc')
+          .textContent.trim()
+        data.TICKER.overview.price = document
+          .querySelector('.content-inner .box1 .num')
+          .textContent.trim()
 
-      data.TICKER.stockOwnership[0].name = 'Foreign Ownership'
-      data.TICKER.stockOwnership[0].value = Number(
-        document.querySelector('.company-boxes .box-item1 .per1').textContent.trim().slice(0, -1)
-      )
-      data.TICKER.stockOwnership[1].name = 'GCC Nationals'
-      data.TICKER.stockOwnership[1].value = Number(
-        document.querySelector('.company-boxes .box-item2 .per1').textContent.trim().slice(0, -1)
-      )
-      data.TICKER.stockOwnership[2].name = 'UAE Nationals'
-      data.TICKER.stockOwnership[2].value = Number(
-        document.querySelector('.company-boxes .box-item3 .per1').textContent.trim().slice(0, -1)
-      )
-      data.TICKER.stockOwnership[3].name = 'Arab Countries'
-      data.TICKER.stockOwnership[3].value = Number(
-        document.querySelector('.company-boxes .box-item4 .per1').textContent.trim().slice(0, -1)
-      )
+        data.TICKER.stockOwnership[0].name = 'Foreign Ownership'
+        data.TICKER.stockOwnership[0].value = Number(
+          document.querySelector('.company-boxes .box-item1 .per1').textContent.trim().slice(0, -1)
+        )
+        data.TICKER.stockOwnership[1].name = 'GCC Nationals'
+        data.TICKER.stockOwnership[1].value = Number(
+          document.querySelector('.company-boxes .box-item2 .per1').textContent.trim().slice(0, -1)
+        )
+        data.TICKER.stockOwnership[2].name = 'UAE Nationals'
+        data.TICKER.stockOwnership[2].value = Number(
+          document.querySelector('.company-boxes .box-item3 .per1').textContent.trim().slice(0, -1)
+        )
+        data.TICKER.stockOwnership[3].name = 'Arab Countries'
+        data.TICKER.stockOwnership[3].value = Number(
+          document.querySelector('.company-boxes .box-item4 .per1').textContent.trim().slice(0, -1)
+        )
 
-      const financials = data.TICKER.financials.valuation
-      const map = {
-        'Market Cap': 'Market Capitalization',
-        'Enterprise Value (MRQ)': 'Enterprise Value (MRQ)',
-        'Enterprise Value/EBITDA (TTM)': 'Enterprise Value/EBITDA (TTM)',
-        'Shares Outstanding': 'Total Shares Outstanding',
-        Employees: 'Number of Employees',
-        Shareholders: 'Number of Shareholders',
-        'PE Ratio (TTM)': 'Price to Earnings Ratio (TTM)',
-        'Price to Revenue (TTM)': 'Price to Revenue Ratio (TTM)',
-        'Price to Book (FY)': 'Price to Book (FY)',
-        'Price to Sales (FY)': 'Price to Sales (FY)',
+        const financials = data.TICKER.financials.valuation
+        const map = {
+          'Market Cap': 'Market Capitalization',
+          'Enterprise Value (MRQ)': 'Enterprise Value (MRQ)',
+          'Enterprise Value/EBITDA (TTM)': 'Enterprise Value/EBITDA (TTM)',
+          'Shares Outstanding': 'Total Shares Outstanding',
+          Employees: 'Number of Employees',
+          Shareholders: 'Number of Shareholders',
+          'PE Ratio (TTM)': 'Price to Earnings Ratio (TTM)',
+          'Price to Revenue (TTM)': 'Price to Revenue Ratio (TTM)',
+          'Price to Book (FY)': 'Price to Book (FY)',
+          'Price to Sales (FY)': 'Price to Sales (FY)',
+        }
+
+        // document.querySelectorAll('.financials li').forEach((li) => {
+        //   const label = li.querySelector('span:nth-child(1)').textContent.trim()
+        //   const value = li.querySelector('span:nth-child(2)').textContent.trim()
+        //   if (map[label]) {
+        //     financials[map[label]] = value
+        //   }
+        // })
       }
-
-      // document.querySelectorAll('.financials li').forEach((li) => {
-      //   const label = li.querySelector('span:nth-child(1)').textContent.trim()
-      //   const value = li.querySelector('span:nth-child(2)').textContent.trim()
-      //   if (map[label]) {
-      //     financials[map[label]] = value
-      //   }
-      // })
 
       return data
     })
