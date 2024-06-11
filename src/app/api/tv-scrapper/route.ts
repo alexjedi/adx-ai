@@ -7,6 +7,7 @@ const CHROMIUM_PATH =
   'https://vomrghiulbmrfvmhlflk.supabase.co/storage/v1/object/public/chromium-pack/chromium-v123.0.0-pack.tar'
 
 async function getBrowser() {
+  console.log('Current VERCEL_ENV:', process.env.VERCEL_ENV)
   if (process.env.VERCEL_ENV === 'production') {
     const chromium = await import('@sparticuz/chromium-min').then((mod) => mod.default)
 
