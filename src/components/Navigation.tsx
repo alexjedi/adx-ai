@@ -9,8 +9,10 @@ import {
   CreditCard,
   DollarSign,
   Languages,
+  Layout,
   Menu,
   Package2,
+  Presentation,
   Search,
   Users,
 } from 'lucide-react'
@@ -29,17 +31,26 @@ import { ThemeSelector } from './ThemeSelector'
 import Image from 'next/image'
 import logo from '@/app/apple-touch-icon.png'
 import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 
 type NavigationProps = {
   onSearchClick?: () => void
+  onCompactClick?: () => void
+  isCompact?: boolean
 }
 
-const Navigation: React.FC<NavigationProps> = ({ onSearchClick }) => {
+const Navigation: React.FC<NavigationProps> = ({ onSearchClick, onCompactClick, isCompact }) => {
   const pathname = usePathname()
 
   const handleSearchClick = () => {
     if (onSearchClick) {
       onSearchClick()
+    }
+  }
+
+  const handleCompactClick = () => {
+    if (onCompactClick) {
+      onCompactClick()
     }
   }
 
@@ -136,6 +147,10 @@ const Navigation: React.FC<NavigationProps> = ({ onSearchClick }) => {
           </div>
         </form>
         <ThemeSelector />
+        <Button variant="ghost" size="icon" className="rounded-full" onClick={handleCompactClick}>
+          {isCompact ? <Presentation className="h-5 w-5" /> : <Layout className="h-5 w-5" />}
+          <span className="sr-only">Toggle presentation</span>
+        </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="rounded-full">

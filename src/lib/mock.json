@@ -168,11 +168,11 @@
       "epsGrowth3Y": 32.8
     },
     "dividends": [
-      { "year": 2019, "dividend": 0.5, "yield": 3.2 },
-      { "year": 2020, "dividend": 0.45, "yield": 3.1 },
-      { "year": 2021, "dividend": 0.55, "yield": 3.6 },
-      { "year": 2022, "dividend": 0.65, "yield": 4.3 },
-      { "year": 2023, "dividend": 0.75, "yield": 4.9 }
+      { "year": 2019, "dividend": 0.73, "yield": 4.88 },
+      { "year": 2020, "dividend": 0.73, "yield": 5.74 },
+      { "year": 2021, "dividend": 0.48, "yield": 2.6 },
+      { "year": 2022, "dividend": 0.52, "yield": 3.04 },
+      { "year": 2023, "dividend": 0.71, "yield": 5.09 }
     ],
     "highsLows": {
       "high": 15.6,
@@ -296,11 +296,11 @@
       "epsGrowth3Y": 13.1
     },
     "dividends": [
-      { "year": 2019, "dividend": 0.1029, "yield": 3.25 },
-      { "year": 2020, "dividend": 0.1029, "yield": 3.12 },
-      { "year": 2021, "dividend": 0.1029, "yield": 3.57 },
-      { "year": 2022, "dividend": 0.1029, "yield": 4.22 },
-      { "year": 2023, "dividend": 0.1029, "yield": 5.3 }
+      { "year": 2019, "dividend": 0.19, "yield": 6.45 },
+      { "year": 2020, "dividend": 0.21, "yield": 5.49 },
+      { "year": 2021, "dividend": 0.21, "yield": 4.82 },
+      { "year": 2022, "dividend": 0.21, "yield": 4.66 },
+      { "year": 2023, "dividend": 0.21, "yield": 5.56 }
     ],
     "highsLows": {
       "high": 4.15,
@@ -427,11 +427,11 @@
       "epsGrowth3Y": 17.1
     },
     "dividends": [
-      { "year": 2019, "dividend": 0.17, "yield": 2.92 },
-      { "year": 2020, "dividend": 0.17, "yield": 3.12 },
-      { "year": 2021, "dividend": 0.17, "yield": 3.57 },
-      { "year": 2022, "dividend": 0.17, "yield": 4.22 },
-      { "year": 2023, "dividend": 0.17, "yield": 2.92 }
+      { "year": 2019, "dividend": 0.15, "yield": 6.71 },
+      { "year": 2020, "dividend": 0.15, "yield": 4.6 },
+      { "year": 2021, "dividend": 0.15, "yield": 3.76 },
+      { "year": 2022, "dividend": 0.16, "yield": 3.61 },
+      { "year": 2023, "dividend": 0.17, "yield": 3.18 }
     ],
     "highsLows": {
       "high": 6.15,

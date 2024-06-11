@@ -75,6 +75,7 @@ import empty from '@/lib/mockEmpty.json'
 
 export default function Dashboard() {
   const [open, setOpen] = useState(false)
+  const [isCompact, setIsCompact] = useState(false)
   const mock = false
   const [extractedFinancials, setExtractedFinancials] = useState<DataFinancials>()
   const [extractedOverview, setExtractedOverview] = useState()
@@ -149,6 +150,10 @@ export default function Dashboard() {
     setOpen((open) => !open)
   }
 
+  const handleCompactClick = () => {
+    setIsCompact(() => !isCompact)
+  }
+
   const Financials = ({ title, data }: { title: string; data: any }) => (
     <div className="mb-8">
       <h2 className="text-lg font-semibold mb-4">{title}</h2>
@@ -165,7 +170,11 @@ export default function Dashboard() {
 
   return (
     <div className="flex min-h-screen w-full flex-col overflow-hidden">
-      <Navigation onSearchClick={handleSearchClick} />
+      <Navigation
+        onSearchClick={handleSearchClick}
+        onCompactClick={handleCompactClick}
+        isCompact={isCompact}
+      />
       {loading ? (
         <div className="absolute inset-0 z-10 flex h-full w-full items-center justify-center gap-2 text-sm text-muted-foreground">
           <div className="h-4 w-4">
@@ -188,77 +197,79 @@ export default function Dashboard() {
         </div>
       ) : (
         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8" ref={contentToPrint}>
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/">ADX</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator>
-                <Slash className="size-4 text-muted-foreground" />
-              </BreadcrumbSeparator>
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/components">
-                  {mock
-                    ? extractedOverview.overview.sector
-                    : (data as unknown as Data)[ticker]?.overview.sector}
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator>
-                <Slash className="size-4 text-muted-foreground" />
-              </BreadcrumbSeparator>
-              <BreadcrumbItem>
-                <BreadcrumbPage>{ticker}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-          <section className="flex flex-col md:flex-row items-start py-2">
-            <div className="relative w-24 h-24 mr-4">
-              <Image
-                src={`https://s3-symbol-logo.tradingview.com/${
-                  (data as unknown as Data)[ticker]?.overview.url
-                }--big.svg`}
-                alt="Logo"
-                layout="fill"
-                objectFit="contain"
-                className="rounded-full"
-              />
-            </div>
-            <div className="flex flex-col flex-grow">
-              <div className="flex flex-col items-start space-y-4">
-                <h1 className="text-xl md:text-3xl font-semibold">
-                  {(data as unknown as Data)[ticker]?.overview.name}
-                </h1>
-                <Button variant="outline" className="px-4 font-medium">
-                  {(data as unknown as Data)[ticker]?.overview.symbolOnADX} - Abu Dhabi Securities
-                  Exchange
-                </Button>
-                <div className="text-foreground text-base font-medium">
-                  {mock
-                    ? extractedOverview.overview.price.slice(0, 5)
-                    : (data as unknown as Data)[ticker]?.overview.price}{' '}
-                  AED
-                  <span className="text-green-600 text-sm md:ml-1">
-                    {mock ? extractedOverview.overview.price.slice(9) : ''}
-                  </span>
+          <section className={`flex-col gap-4 md:gap-8 ${isCompact ? 'hidden' : 'flex'} `}>
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/">ADX</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator>
+                  <Slash className="size-4 text-muted-foreground" />
+                </BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/components">
+                    {mock
+                      ? extractedOverview.overview.sector
+                      : (data as unknown as Data)[ticker]?.overview.sector}
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator>
+                  <Slash className="size-4 text-muted-foreground" />
+                </BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  <BreadcrumbPage>{ticker}</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+            <section className="flex flex-col md:flex-row items-start py-2">
+              <div className="relative w-24 h-24 mr-4">
+                <Image
+                  src={`https://s3-symbol-logo.tradingview.com/${
+                    (data as unknown as Data)[ticker]?.overview.url
+                  }--big.svg`}
+                  alt="Logo"
+                  layout="fill"
+                  objectFit="contain"
+                  className="rounded-full"
+                />
+              </div>
+              <div className="flex flex-col flex-grow">
+                <div className="flex flex-col items-start space-y-4">
+                  <h1 className="text-xl md:text-3xl font-semibold">
+                    {(data as unknown as Data)[ticker]?.overview.name}
+                  </h1>
+                  <Button variant="outline" className="px-4 font-medium">
+                    {(data as unknown as Data)[ticker]?.overview.symbolOnADX} - Abu Dhabi Securities
+                    Exchange
+                  </Button>
+                  <div className="text-foreground text-base font-medium">
+                    {mock
+                      ? extractedOverview.overview.price.slice(0, 5)
+                      : (data as unknown as Data)[ticker]?.overview.price}{' '}
+                    AED
+                    <span className="text-green-600 text-sm md:ml-1">
+                      {mock ? extractedOverview.overview.price.slice(9) : ''}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <Button
-              variant="outline"
-              className="md:ml-auto mr-4 mt-2 md:mt-0 flex md:inline-flex"
-              onClick={() => window.location.reload()}
-            >
-              <RefreshCcw className="h-4 w-4 mr-2" />
-              Refresh
-            </Button>
-            <Button
-              variant="outline"
-              className="md:ml-auto mt-2 md:mt-0 flex md:inline-flex"
-              onClick={() => handlePrint(null, () => contentToPrint.current)}
-            >
-              <Printer className="h-4 w-4 mr-2" />
-              Print Overview
-            </Button>
+              <Button
+                variant="outline"
+                className="md:ml-auto mr-4 mt-2 md:mt-0 flex md:inline-flex"
+                onClick={() => window.location.reload()}
+              >
+                <RefreshCcw className="h-4 w-4 mr-2" />
+                Refresh
+              </Button>
+              <Button
+                variant="outline"
+                className="md:ml-auto mt-2 md:mt-0 flex md:inline-flex"
+                onClick={() => handlePrint(null, () => contentToPrint.current)}
+              >
+                <Printer className="h-4 w-4 mr-2" />
+                Print Overview
+              </Button>
+            </section>
           </section>
           <section>
             <Tabs defaultValue="overview" className="w-full">
