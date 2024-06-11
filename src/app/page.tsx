@@ -131,9 +131,14 @@ export default function Dashboard() {
     setTicker(ticker)
     const extractedFinance = await scrapePageFinancials(ticker)
     const extractedOver = await scrapePageOverview(ticker)
+    console.log('extractedFinance', extractedFinance)
+    console.log('extractedOver', extractedOver)
     setExtractedFinancials(extractedFinance)
-    setExtractedOverview(extractedOver)
-    console.log(extractedOverview)
+    if (extractedOver === 'URL cannot be loaded') {
+      setExtractedOverview(empty['TICKER'])
+    } else {
+      setExtractedOverview(extractedOver)
+    }
     setLoading(false)
   }
 
@@ -148,9 +153,14 @@ export default function Dashboard() {
       setTicker('ADIB')
       const extractedFinance = await scrapePageFinancials(ticker)
       const extractedOver = await scrapePageOverview(ticker)
+      console.log('extractedFinance', extractedFinance)
+      console.log('extractedOver', extractedOver)
       setExtractedFinancials(extractedFinance)
-      setExtractedOverview(extractedOver)
-      console.log(extractedOverview)
+      if (extractedOver === 'URL cannot be loaded') {
+        setExtractedOverview(empty['TICKER'])
+      } else {
+        setExtractedOverview(extractedOver)
+      }
       setLoading(false)
     }
     fetchData()
@@ -368,7 +378,7 @@ export default function Dashboard() {
                         {isHorizontalBarChart ? (
                           <PieChart
                             data={
-                              extractedOverview.stockOwnership
+                              extractedOverview.stockOwnership[0].name
                                 ? extractedOverview.stockOwnership
                                 : (data as unknown as Data)[ticker]?.stockOwnership
                             }
@@ -378,7 +388,7 @@ export default function Dashboard() {
                             xKey="name"
                             yKey="value"
                             data={
-                              extractedOverview.stockOwnership
+                              extractedOverview.stockOwnership[0].name
                                 ? extractedOverview.stockOwnership
                                 : (data as unknown as Data)[ticker]?.stockOwnership
                             }
