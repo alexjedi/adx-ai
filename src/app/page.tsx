@@ -75,10 +75,9 @@ import empty from '@/lib/mockEmpty.json'
 
 export default function Dashboard() {
   const [open, setOpen] = useState(false)
-  const [extractedFinancials, setExtractedFinancials] = useState<DataFinancials>(
-    empty['TICKER'].financials
-  )
-  const [extractedOverview, setExtractedOverview] = useState(empty['TICKER'])
+  const mock = false
+  const [extractedFinancials, setExtractedFinancials] = useState<DataFinancials>()
+  const [extractedOverview, setExtractedOverview] = useState()
   const [ticker, setTicker] = useState('ADIB')
   const [url, setURL] = useState('')
   const [loading, setLoading] = useState(true)
@@ -129,21 +128,10 @@ export default function Dashboard() {
     if (loading || ticker === '') return
     setLoading(true)
     setTicker(ticker)
-    const extractedFinance = await scrapePageFinancials(ticker)
-    const extractedOver = await scrapePageOverview(ticker)
-    console.log('extractedFinance', extractedFinance)
-    console.log('extractedOver', extractedOver)
-    if (extractedOver === 'URL cannot be loaded') {
-      setExtractedFinancials(empty['TICKER'].financials)
-    } else {
-      setExtractedFinancials(extractedFinance)
-    }
-    if (extractedOver === 'URL cannot be loaded') {
-      setExtractedOverview(empty['TICKER'])
-    } else {
-      setExtractedOverview(extractedOver)
-    }
-    setLoading(false)
+    setTimeout(async () => {
+      setTicker(ticker)
+      setLoading(false)
+    }, 2000)
   }
 
   const runCommand = useCallback((command: () => unknown) => {
@@ -152,26 +140,9 @@ export default function Dashboard() {
   }, [])
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true)
-      setTicker('ADIB')
-      const extractedFinance = await scrapePageFinancials(ticker)
-      const extractedOver = await scrapePageOverview(ticker)
-      console.log('extractedFinance', extractedFinance)
-      console.log('extractedOver', extractedOver)
-      if (extractedOver === 'URL cannot be loaded') {
-        setExtractedFinancials(empty['TICKER'].financials)
-      } else {
-        setExtractedFinancials(extractedFinance)
-      }
-      if (extractedOver === 'URL cannot be loaded') {
-        setExtractedOverview(empty['TICKER'])
-      } else {
-        setExtractedOverview(extractedOver)
-      }
+    setTimeout(() => {
       setLoading(false)
-    }
-    fetchData()
+    }, 1000)
   }, [])
 
   const handleSearchClick = () => {
@@ -227,7 +198,7 @@ export default function Dashboard() {
               </BreadcrumbSeparator>
               <BreadcrumbItem>
                 <BreadcrumbLink href="/components">
-                  {extractedOverview.overview.sector
+                  {mock
                     ? extractedOverview.overview.sector
                     : (data as unknown as Data)[ticker]?.overview.sector}
                 </BreadcrumbLink>
@@ -262,14 +233,12 @@ export default function Dashboard() {
                   Exchange
                 </Button>
                 <div className="text-foreground text-base font-medium">
-                  {extractedOverview.overview.price
+                  {mock
                     ? extractedOverview.overview.price.slice(0, 5)
                     : (data as unknown as Data)[ticker]?.overview.price}{' '}
                   AED
                   <span className="text-green-600 text-sm md:ml-1">
-                    {extractedOverview.overview.price
-                      ? extractedOverview.overview.price.slice(9)
-                      : ''}
+                    {mock ? extractedOverview.overview.price.slice(9) : ''}
                   </span>
                 </div>
               </div>
@@ -310,7 +279,7 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-xl font-medium">
-                          {extractedOverview.overview.sector
+                          {mock
                             ? extractedOverview.overview.sector
                             : (data as unknown as Data)[ticker]?.overview.sector}
                         </div>
@@ -323,7 +292,7 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-xl font-medium">
-                          {extractedOverview.overview.incorporation
+                          {mock
                             ? extractedOverview.overview.incorporation
                             : (data as unknown as Data)[ticker]?.overview.incorporation}
                         </div>
@@ -336,7 +305,7 @@ export default function Dashboard() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-xl font-medium">
-                          {extractedOverview.overview.listing
+                          {mock
                             ? extractedOverview.overview.listing
                             : (data as unknown as Data)[ticker]?.overview.listing}
                         </div>
@@ -350,9 +319,7 @@ export default function Dashboard() {
                       <CardContent>
                         <div className="text-xl font-medium">
                           {formatPropertyValue(
-                            extractedOverview.overview.sharecapital
-                              ? extractedOverview.overview.sharecapital
-                              : (data as unknown as Data)[ticker]?.overview.sharecapital
+                            (data as unknown as Data)[ticker]?.overview.sharecapital
                           )}
                         </div>
                       </CardContent>
@@ -386,7 +353,7 @@ export default function Dashboard() {
                         {isHorizontalBarChart ? (
                           <PieChart
                             data={
-                              extractedOverview.stockOwnership[0].name
+                              mock
                                 ? extractedOverview.stockOwnership
                                 : (data as unknown as Data)[ticker]?.stockOwnership
                             }
@@ -396,7 +363,7 @@ export default function Dashboard() {
                             xKey="name"
                             yKey="value"
                             data={
-                              extractedOverview.stockOwnership[0].name
+                              mock
                                 ? extractedOverview.stockOwnership
                                 : (data as unknown as Data)[ticker]?.stockOwnership
                             }
@@ -579,7 +546,7 @@ export default function Dashboard() {
                   <section className="flex flex-col space-y-8 lg:flex-row justify-between lg:space-x-8 lg:space-y-0">
                     <Card x-chunk="dashboard-01-chunk-3" className="w-full">
                       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-base font-medium">Dividents</CardTitle>
+                        <CardTitle className="text-base font-medium">Dividends</CardTitle>
                         <HandCoins className="h-4 w-4 text-muted-foreground" />
                       </CardHeader>
                       <CardContent className="w-full">
@@ -602,13 +569,13 @@ export default function Dashboard() {
                           data={[
                             {
                               name: '52 Week High',
-                              value: extractedFinancials
+                              value: mock
                                 ? Number(extractedFinancials['price history']['52 Week High'])
                                 : (data as unknown as Data)[ticker]?.highsLows.high,
                             },
                             {
                               name: '100%',
-                              value: extractedFinancials
+                              value: mock
                                 ? 100 - Number(extractedFinancials['price history']['52 Week High'])
                                 : 100 - (data as unknown as Data)[ticker]?.highsLows.high,
                             },
@@ -619,13 +586,13 @@ export default function Dashboard() {
                           data={[
                             {
                               name: '52 Week Low',
-                              value: extractedFinancials
+                              value: mock
                                 ? Number(extractedFinancials['price history']['52 Week Low'])
                                 : (data as unknown as Data)[ticker]?.highsLows.low,
                             },
                             {
                               name: '100%',
-                              value: extractedFinancials
+                              value: mock
                                 ? 100 - Number(extractedFinancials['price history']['52 Week Low'])
                                 : 100 - (data as unknown as Data)[ticker]?.highsLows.low,
                             },
@@ -660,7 +627,7 @@ export default function Dashboard() {
                     <Financials
                       title="Valuation"
                       data={
-                        extractedFinancials
+                        mock
                           ? extractedFinancials?.valuation
                           : (data as unknown as Data)[ticker]?.financials.valuation
                       }
@@ -668,7 +635,7 @@ export default function Dashboard() {
                     <Financials
                       title="Balance Sheet"
                       data={
-                        extractedFinancials['balance sheet']['Current Ratio (MRQ)']
+                        mock
                           ? extractedFinancials['balance sheet']
                           : (data as unknown as Data)[ticker]?.financials['balance sheet']
                       }
@@ -676,7 +643,7 @@ export default function Dashboard() {
                     <Financials
                       title="Operating Metrics"
                       data={
-                        extractedFinancials
+                        mock
                           ? extractedFinancials['operating metrics']
                           : (data as unknown as Data)[ticker]?.financials['operating metrics']
                       }
@@ -686,7 +653,7 @@ export default function Dashboard() {
                     <Financials
                       title="Price History"
                       data={
-                        extractedFinancials
+                        mock
                           ? extractedFinancials['price history']
                           : (data as unknown as Data)[ticker]?.financials['price history']
                       }
@@ -694,7 +661,7 @@ export default function Dashboard() {
                     <Financials
                       title="Dividends"
                       data={
-                        extractedFinancials
+                        mock
                           ? extractedFinancials?.dividends
                           : (data as unknown as Data)[ticker]?.financials.dividends
                       }
@@ -702,7 +669,7 @@ export default function Dashboard() {
                     <Financials
                       title="Margins"
                       data={
-                        extractedFinancials
+                        mock
                           ? extractedFinancials?.valuation
                           : (data as unknown as Data)[ticker]?.financials.margins
                       }
@@ -710,7 +677,7 @@ export default function Dashboard() {
                     <Financials
                       title="Income Statement"
                       data={
-                        extractedFinancials
+                        mock
                           ? extractedFinancials['income statement']
                           : (data as unknown as Data)[ticker]?.financials['income statement']
                       }
@@ -722,7 +689,7 @@ export default function Dashboard() {
                 <div className="py-8 px-4 flex flex-col space-y-4">
                   <h2 className="text-lg font-semibold mb-4">Description</h2>
                   <p>
-                    {extractedOverview.overview.description
+                    {mock
                       ? extractedOverview.overview.description
                       : (data as unknown as Data)[ticker]?.overview.description}
                   </p>
