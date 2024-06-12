@@ -79,7 +79,7 @@ export default function Dashboard() {
   const mock = false
   const [extractedFinancials, setExtractedFinancials] = useState<DataFinancials>()
   const [extractedOverview, setExtractedOverview] = useState()
-  const [ticker, setTicker] = useState('ADIB')
+  const [ticker, setTicker] = useState('AAPL')
   const [url, setURL] = useState('')
   const [loading, setLoading] = useState(true)
   const printRef = useRef<HTMLDivElement>(null)
@@ -201,7 +201,7 @@ export default function Dashboard() {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
-                  <BreadcrumbLink href="/">ADX</BreadcrumbLink>
+                  <BreadcrumbLink href="/">NASDAQ</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                   <Slash className="size-4 text-muted-foreground" />
@@ -239,14 +239,13 @@ export default function Dashboard() {
                     {(data as unknown as Data)[ticker]?.overview.name}
                   </h1>
                   <Button variant="outline" className="px-4 font-medium">
-                    {(data as unknown as Data)[ticker]?.overview.symbolOnADX} - Abu Dhabi Securities
-                    Exchange
+                    {(data as unknown as Data)[ticker]?.overview.symbolOnADX} - NASDAQ Stock Market
                   </Button>
                   <div className="text-foreground text-base font-medium">
                     {mock
                       ? extractedOverview.overview.price.slice(0, 5)
                       : (data as unknown as Data)[ticker]?.overview.price}{' '}
-                    AED
+                    USD
                     <span className="text-green-600 text-sm md:ml-1">
                       {mock ? extractedOverview.overview.price.slice(9) : ''}
                     </span>
@@ -740,60 +739,13 @@ export default function Dashboard() {
                     className="cursor-pointer"
                   >
                     <Image
-                      src={`https://s3-symbol-logo.tradingview.com/${
-                        (data as unknown as Data)['FAB']?.overview.url
-                      }--big.svg`}
+                      src={`https://s3-symbol-logo.tradingview.com/apple--big.svg`}
                       alt="Logo"
                       width={24}
                       height={24}
                       className="rounded-full mr-2"
                     />
-                    <span className="font-medium">FAB</span>
-                  </CommandItem>
-                  <CommandItem
-                    onSelect={() => runCommand(() => handleSelect('ADIB'))}
-                    className="cursor-pointer"
-                  >
-                    <Image
-                      src={`https://s3-symbol-logo.tradingview.com/${
-                        (data as unknown as Data)['ADIB']?.overview.url
-                      }--big.svg`}
-                      alt="Logo"
-                      width={24}
-                      height={24}
-                      className="rounded-full mr-2"
-                    />
-                    <span className="font-medium">ADIB</span>
-                  </CommandItem>
-                  <CommandItem
-                    onSelect={() => runCommand(() => handleSelect('ADNOCDIST'))}
-                    className="cursor-pointer"
-                  >
-                    <Image
-                      src={`https://s3-symbol-logo.tradingview.com/${
-                        (data as unknown as Data)['ADNOCDIST']?.overview.url
-                      }--big.svg`}
-                      alt="Logo"
-                      width={24}
-                      height={24}
-                      className="rounded-full mr-2"
-                    />
-                    <span className="font-medium">ADNOCDIST</span>
-                  </CommandItem>
-                  <CommandItem
-                    onSelect={() => runCommand(() => handleSelect('ALDAR'))}
-                    className="cursor-pointer"
-                  >
-                    <Image
-                      src={`https://s3-symbol-logo.tradingview.com/${
-                        (data as unknown as Data)['ALDAR']?.overview.url
-                      }--big.svg`}
-                      alt="Logo"
-                      width={24}
-                      height={24}
-                      className="rounded-full mr-2"
-                    />
-                    <span className="font-medium">ALDAR</span>
+                    <span className="font-medium">APPLE</span>
                   </CommandItem>
                 </CommandGroup>
               </CommandList>

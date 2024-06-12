@@ -138,7 +138,7 @@ const Navigation: React.FC<NavigationProps> = ({ onSearchClick, onCompactClick, 
             >
               <Search className="h-4 w-4 text-muted-foreground" />
               <span className="text-sm text-muted-foreground font-medium hidden md:block">
-                Enter ADX ticker
+                Enter NASDAQ ticker
               </span>
               <p className="text-sm text-muted-foreground hidden md:block">
                 <span className="text-xs">⌘</span>K

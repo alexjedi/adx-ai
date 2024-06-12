@@ -9,7 +9,7 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 
-const COLORS = ['#2c0d68', '#7733f4', '#a387fe', '#F9A88F', '#39C7FF']
+const COLORS = ['#814FFC', '#FF4A9C', '#F9A88F', '#31245B', '#39C7FF']
 
 const BarChartComponent = ({
   data,
